@@ -1,0 +1,78 @@
+/* Styl kontenera */
+.container-register h1 {
+	font-family: Arial, sans-serif;
+	color: #666; /* Kolor tekstu */
+}
+
+.container-register {
+	margin: 0 auto; /* Wyœrodkowanie kontenera */
+	padding: 20px; /* Wewnêtrzny odstêp */
+	background-color: #f2f2f2; /* Kolor t³a */
+	border-radius: 8px;
+	color: #666; /* Kolor tekstu */
+
+	background-color: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Cieñ */
+	filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2)); /* Filtr cienia */
+}
+
+/* Styl nag³ówka */
+h1 {
+	color: #333; /* Kolor tekstu */
+	font-family: Arial, sans-serif; /* Rodzina czcionek */
+	text-align: center; /* Wyœrodkowanie tekstu */
+	margin-bottom: 20px; /* Odleg³oœæ od elementów poni¿ej */
+}
+
+/* Styl dla ka¿dego elementu formularza */
+.input-element-register {
+	min-width : 400px;
+	padding : 10px;
+	margin-bottom: 15px;
+	font-weight:900;
+	font-size:18px;
+}
+
+	/* Styl etykiet */
+	.input-element-register label {
+		display: block; /* Sprawia, ¿e etykieta zajmuje ca³¹ szerokoœæ */
+		margin-bottom: 5px; /* Odleg³oœæ od pola formularza */
+		color: #666; /* Kolor tekstu */
+		font-family: Arial, sans-serif; /* Rodzina czcionek */
+	}
+
+	/* Styl pól formularza */
+	.input-element-register input[type="text"],
+	.input-element-register input[type="email"],
+	.input-element-register input[type="password"] {
+		width: 100%; /* Szerokoœæ pola */
+		padding: 10px; /* Wewnêtrzny odstêp */
+		border: 1px solid #ccc; /* Obramowanie */
+		border-radius: 4px; /* Zaokr¹glenie rogów */
+		box-sizing: border-box; /* Zapewnia, ¿e padding i border s¹ wliczone w szerokoœæ i wysokoœæ */
+	}
+
+/* Zwiêksza u¿ytecznoœæ przez zmianê kursora na wskaŸnik gdy najedziemy na przycisk */
+input[type="submit"]:hover {
+	cursor: pointer;
+}
+
+
+/* Styl przycisku */
+.container-register button[type="submit"] {
+	width: 100%; /* Szerokoœæ przycisku */
+	padding: 10px 0; /* Wewnêtrzny odstêp w pionie */
+	background-color: #4CAF50; /* Kolor t³a przycisku */
+	color: white; /* Kolor tekstu */
+	font-family: Arial, sans-serif; /* Rodzina czcionek */
+	font-size: 16px; /* Rozmiar czcionki */
+	border: none; /* Brak obramowania */
+	border-radius: 4px; /* Zaokr¹glenie rogów */
+	cursor: pointer; /* Kursor wskazuj¹cy */
+	transition: background-color 0.3s ease; /* Animacja zmiany koloru t³a */
+}
+
+	/* Styl przycisku przy najechaniu */
+	.container-register button[type="submit"]:hover {
+		background-color: #45a049; /* Ciemniejszy kolor t³a */
+	}
