@@ -45,3 +45,7 @@ mono_crash.*
 
 # Xcode
 .DS_Store
+/TrainingApp/.vs/TrainingApp/FileContentIndex
+/.vs/App/FileContentIndex
+/.vs
+/TrainingApp/.vs
