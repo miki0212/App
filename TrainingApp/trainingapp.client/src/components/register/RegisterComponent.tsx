@@ -21,8 +21,15 @@ export default function RegisterComponent() {
 	const [errorLastname, setErrorLastname] = useState(false);
 	const [errorLastnameMessage, setErrorLastnameMessage] = useState("");
 
+	const [errorEmail, setErrorEmail] = useState(false);
+	const [errorEmailMessage, setErrorEmailMessage] = useState("");
+
 	const [registerSuccess, setRegisterSuccess] = useState(null);
 	const [showRegisterMessage, setShowRegisterMessage] = useState(false);
+
+	const [errorPassword, setErrorPassword] = useState(false);
+	const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
+
 
 
 	async function registerUser() {
@@ -60,10 +67,23 @@ export default function RegisterComponent() {
 			setErrorLastnameMessage(validateLogin[2].message);
 		}
 
+		setErrorEmail(validateLogin[3].isError); 
+		if (validateLogin[3].isError) {
+			flag = false;
+			setErrorEmailMessage(validateLogin[3].message);
+		}
+
+		setErrorPassword(validateLogin[4].isError);
+		if (validateLogin[4].isError) {
+			flag = false;
+			setErrorPasswordMessage(validateLogin[4].message);
+		}
+
+
 
 		if (flag) {
 
-			const url = new URL('https://localhost:7087/User');
+			const url = new URL('https://localhost:44301/User');
 			url.searchParams.append('login', login);
 			url.searchParams.append('password', password);
 			url.searchParams.append('imie', imie);
@@ -120,13 +140,16 @@ export default function RegisterComponent() {
 
 				<div className="input-element-register">
 					<label>Email</label>
-					<input type="email" max="150" value={email} onChange={(e) => setEmail(e.target.value)} />
+					<input type="email" max="150" value={email} onChange={(e) => setEmail(e.target.value)}  />
+					{errorEmail ? <div className="error-message">{errorEmailMessage}</div> : null}
 				</div>
 
 				<div className="input-element-register">
 					<label>Haslo</label>
-					<input type="password" max="150" value={password} onChange={(e) => setPassword(e.target.value)} />
+					<input type="password" max="50" value={password} onChange={(e) => setPassword(e.target.value)}  />
+					{errorPassword && <div className="error-message">{errorPasswordMessage}</div>}
 				</div>
+
 
 				<div className="input-element-register">
 					<button onClick={registerUser} type="submit">Rejestracja</button>
