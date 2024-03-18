@@ -1,6 +1,8 @@
 
 
+using Microsoft.AspNetCore.Mvc;
+
 public interface IUserController 
 {
-    Task<bool> RegisterUser(string login, string imie, string nazwisko, string email, string password);
+    Task<IActionResult> RegisterUser(UserCredentials user);
 }

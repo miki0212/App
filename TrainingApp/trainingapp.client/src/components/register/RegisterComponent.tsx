@@ -1,16 +1,18 @@
+import { createHash } from 'crypto';
 import IAnswerMessage from '../../Interfaces/IAnswerMessage';
 import INewUser from '../../Interfaces/INewUser';
-import { validateNewUser } from '../Validation/ValidateUser';
+import { validateNewUser, validatePsswordR } from '../Validation/ValidateUser';
 import './RegisterComponentStyle.css';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 export default function RegisterComponent() {
 
 	const [login, setLogin] = useState('');
-	const [imie, setImie] = useState('');
-	const [nazwisko, setNazwisko] = useState('');
+	const [name, setName] = useState('');
+	const [lastname, setLastname] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [passwordR, setPasswordR] = useState('');
 
 	const [errorLogin, setErrorLogin] = useState(false);
 	const [errorLoginMessage, setErrorLoginMessage] = useState("");
@@ -24,26 +26,31 @@ export default function RegisterComponent() {
 	const [errorEmail, setErrorEmail] = useState(false);
 	const [errorEmailMessage, setErrorEmailMessage] = useState("");
 
-	const [registerSuccess, setRegisterSuccess] = useState(null);
-	const [showRegisterMessage, setShowRegisterMessage] = useState(false);
-
 	const [errorPassword, setErrorPassword] = useState(false);
 	const [errorPasswordMessage, setErrorPasswordMessage] = useState("");
+
+	const [errorPasswordR, setErrorPasswordR] = useState(false);
+	const [errorPasswordRMessage, setErrorPasswordRMessage] = useState("");
+
+
+	const [responseServerMessage, setResponseServerMessage] = useState('');
+
+	const [errorRegister, setErrorRegister] = useState(false);
 
 
 
 	async function registerUser() {
 
-
 		let user: INewUser = {
 			Login: login,
-			Imie: imie,
-			Nazwisko: nazwisko,
+			Name: name,
+			Lastname: lastname,
 			Email: email,
-			Haslo: password
+			Password: password
 		}
 
 		var validateLogin: IAnswerMessage[] = validateNewUser(user);
+		var validatePassword: IAnswerMessage = validatePsswordR(password, passwordR);
 
 		console.log(validateLogin.length)
 
@@ -67,7 +74,7 @@ export default function RegisterComponent() {
 			setErrorLastnameMessage(validateLogin[2].message);
 		}
 
-		setErrorEmail(validateLogin[3].isError); 
+		setErrorEmail(validateLogin[3].isError);
 		if (validateLogin[3].isError) {
 			flag = false;
 			setErrorEmailMessage(validateLogin[3].message);
@@ -79,42 +86,85 @@ export default function RegisterComponent() {
 			setErrorPasswordMessage(validateLogin[4].message);
 		}
 
-
+		setErrorPasswordR(validatePassword.isError)
+		if (validatePassword.isError) {
+			flag = false;
+			setErrorPasswordRMessage(validatePassword.message)
+		}
 
 		if (flag) {
 
-			const url = new URL('https://localhost:44301/User');
-			url.searchParams.append('login', login);
-			url.searchParams.append('password', password);
-			url.searchParams.append('imie', imie);
-			url.searchParams.append('nazwisko', nazwisko);
-			url.searchParams.append('email', email);
+			const url = new URL('https://localhost:7087/User');
 
 			await fetch(url, {
 				method: 'POST',
 				headers: {
-					headers: {
-						'Content-Type': 'application/json',
-						'Access-Control-Allow-Origin': "*"
-					}
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': "*"
 				},
+
+				body: JSON.stringify(user)
 			})
 				.then(response => {
-					if (!response.ok) {
+					if (response.status === 400) {
+						setErrorRegister(true)
+						setResponseServerMessage("Wyst¹pi³ b³¹d serwera");
 						throw new Error('Network response was not ok');
+					} else if (response.status === 409) {
+						setErrorRegister(true);
 					}
-					return response.json();
+
+					return response.text();
 				})
 				.then(data => {
-					setShowRegisterMessage(true);
-					setRegisterSuccess(data);
+					console.log(data)
+					setResponseServerMessage(data);
 					return data;
 				})
-				.catch(error => {
-					console.error('There was a problem with your fetch operation:', error);
+				.catch(() => {
+					setErrorRegister(true)
+					setResponseServerMessage("Wyst¹pi³ b³¹d serwera");
 				});
 		}
 	}
+
+	function loginHandler(e: ChangeEvent) {
+		let loginValue = (e.target as HTMLInputElement).value;
+		setLogin(loginValue)
+		setErrorLogin(false);
+		setErrorRegister(false);
+	}
+	function nameHandler(e: ChangeEvent) {
+		let nameValue = (e.target as HTMLInputElement).value;
+		setName(nameValue)
+		setErrorName(false);
+		setErrorRegister(false);
+	}
+	function lastnameHandler(e: ChangeEvent) {
+		let lastnameValue = (e.target as HTMLInputElement).value;
+		setLastname(lastnameValue)
+		setErrorLastname(false);
+		setErrorRegister(false);
+	}
+	function emailHandler(e: ChangeEvent) {
+		let emailValue = (e.target as HTMLInputElement).value;
+		setEmail(emailValue)
+		setErrorEmail(false);
+		setErrorRegister(false);
+	}
+	function passwordHandler(e: ChangeEvent) {
+		let passwordValue = (e.target as HTMLInputElement).value;
+		setPassword(passwordValue)
+		setErrorPassword (false);
+		setErrorRegister(false);
+	}
+	function passwordRHandler(e: ChangeEvent) {
+		let passwordRValue = (e.target as HTMLInputElement).value;
+		setPasswordR(passwordRValue)
+		setErrorPasswordR(false);
+		setErrorRegister(false);
+	}
+
 
 	return (
 		<div>
@@ -122,32 +172,38 @@ export default function RegisterComponent() {
 				<h1>Rejestracja</h1>
 				<div className={`input-element-register`} >
 					<label>Login</label>
-					<input type="text" className={`${errorLogin ? 'error-border' : 'normal-border-input-register '}`} max="50" value={login} onChange={(e) => setLogin(e.target.value)} />
+					<input type="text" className={`${errorLogin ? 'error-border' : 'normal-border-input-register '}`} max="50" value={login} onChange={(e) => loginHandler(e)} />
 					{errorLogin ? <div className="error-message">{errorLoginMessage}</div> : <></>}
 				</div>
 
 				<div className="input-element-register">
 					<label>Imie</label>
-					<input type="text" max="50" value={imie} onChange={(e) => setImie(e.target.value)} />
+					<input type="text" max="50" value={name} onChange={(e) => nameHandler(e)} />
 					{errorName ? <div className="error-message">{errorNameMessage}</div> : <></>}
 				</div>
 
 				<div className="input-element-register">
 					<label>Nazwisko</label>
-					<input type="text" max="50" value={nazwisko} onChange={(e) => setNazwisko(e.target.value)} />
+					<input type="text" max="50" value={lastname} onChange={(e) => lastnameHandler(e)} />
 					{errorLastname ? <div className="error-message">{errorLastnameMessage}</div> : <></>}
 				</div>
 
 				<div className="input-element-register">
 					<label>Email</label>
-					<input type="email" max="150" value={email} onChange={(e) => setEmail(e.target.value)}  />
+					<input type="email" max="150" value={email} onChange={(e) => emailHandler(e)} />
 					{errorEmail ? <div className="error-message">{errorEmailMessage}</div> : null}
 				</div>
 
 				<div className="input-element-register">
 					<label>Haslo</label>
-					<input type="password" max="50" value={password} onChange={(e) => setPassword(e.target.value)}  />
+					<input type="password" max="50" value={password} onChange={(e) => passwordHandler(e)} />
 					{errorPassword && <div className="error-message">{errorPasswordMessage}</div>}
+				</div>
+
+				<div className="input-element-register">
+					<label>Powtorz Haslo</label>
+					<input type="password" max="50" value={passwordR} onChange={(e) => passwordRHandler(e)} />
+					{errorPasswordR && <div className="error-message">{errorPasswordRMessage}</div>}
 				</div>
 
 
@@ -156,7 +212,7 @@ export default function RegisterComponent() {
 				</div>
 
 				<div className="register-message">
-					{showRegisterMessage ? registerSuccess ? <div>Dodano uzytkownika</div> : <div>Podany uzytkownik jest zarejestrowany</div> : <></>}
+					{<div className={`${errorRegister ? 'error-register' : ''} register-message`}>{responseServerMessage}</div>}
 				</div>
 
 

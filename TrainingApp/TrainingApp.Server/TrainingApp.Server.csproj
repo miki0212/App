@@ -39,6 +39,9 @@
 
   <ItemGroup>
     <Folder Include="Controllers\IControllers\" />
+    <Folder Include="Classes\" />
+    <Folder Include="Nowy folder\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

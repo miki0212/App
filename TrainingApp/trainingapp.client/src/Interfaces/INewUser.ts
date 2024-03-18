@@ -2,8 +2,8 @@
 
 export default interface INewUser {
 	Login: string,
-	Imie: string,
-	Nazwisko: string,
+	Name: string,
+	Lastname: string,
 	Email: string,
-	Haslo : string
+	Password : string
 }

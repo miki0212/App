@@ -8,46 +8,39 @@ namespace TrainingApp.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase,IUserController
+    public class UserController : ControllerBase, IUserController
     {
-        //private readonly AppDbContext _dbContext;
-        public UserController(ILogger<WeatherForecastController> logger)
+        private readonly ILogger<UserController> _logger;
+        private readonly IConfiguration _configuration;
+        private UserService _userService;
+
+        public UserController(ILogger<UserController> logger, IConfiguration configuration)
         {
-            //_dbContext = dbContext;
+            _userService = new UserService(configuration);
+            _logger = logger;
+            _configuration = configuration;
         }
 
         [HttpPost(Name = "registerUser")]
-        public async Task<bool> RegisterUser(string login,string imie,string nazwisko,string email,string password)
+        public async Task<IActionResult> RegisterUser([FromBody] UserCredentials User)
         {
-            //Check 
+            Dictionary<string, string> statusMap = await _userService.RegisterUser(User);
+            
+            statusMap.TryGetValue("statusCode", out string code);
+            statusMap.TryGetValue("message", out string message);
 
-
-
-            using (FitAppContext context = new FitAppContext()) 
+            if (int.Parse(code) == 0)
             {
-                var existsLogin = context.Users.FirstOrDefault(t => t.Login == login);
-                var existsEmail = context.Users.FirstOrDefault(t => t.Email == email);
-
-
-                if (existsLogin != null || existsEmail != null) 
-                {
-                    return false;
-                }
-
-                var newUser = new User
-                {
-                    Login = login,
-                    Imie = imie,
-                    Nazwisko = nazwisko,
-                    Email = email,
-                    Haslo = password
-                };
-
-                context.Users.Add(newUser);
-                context.SaveChanges();
+                return Ok(message);
             }
-       
-            return true;
+            else if (int.Parse(code) == 1)
+            {
+                return NotFound(message);
+            }
+            else
+            {
+                return Conflict(message);
+            }
         }
     }
 }
