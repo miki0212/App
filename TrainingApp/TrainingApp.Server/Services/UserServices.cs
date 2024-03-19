@@ -22,7 +22,6 @@ public class UserService
         Dictionary<string, string> messages = new Dictionary<string, string>();
         using (FitAppContext context = new FitAppContext(_configuration))
         {
-
             try
             {
                 var existsUser = context.Users.FirstOrDefault(t => t.Login == user.Login);

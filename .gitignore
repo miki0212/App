@@ -49,4 +49,3 @@ mono_crash.*
 /.vs/App/FileContentIndex
 /.vs
 /TrainingApp/.vs
-/TrainingApp/TrainingApp.Server/Data/FitAppContext.cs
