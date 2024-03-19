@@ -21,11 +21,35 @@ namespace TrainingApp.Server.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost(Name = "registerUser")]
+        //[HttpPost(Name = "registerUser")]
+        [HttpPost("register", Name = "RegisterUser")]
         public async Task<IActionResult> RegisterUser([FromBody] UserCredentials User)
         {
             Dictionary<string, string> statusMap = await _userService.RegisterUser(User);
-            
+
+            statusMap.TryGetValue("statusCode", out string code);
+            statusMap.TryGetValue("message", out string message);
+
+            if (int.Parse(code) == 0)
+            {
+                return Ok(message);
+            }
+            else if (int.Parse(code) == 1)
+            {
+                return NotFound(message);
+            }
+            else
+            {
+                return Conflict(message);
+            }
+        }
+
+        //[HttpPost(Name = "loginUser")]
+        [HttpPost("login", Name = "LoginUser")]
+        public async Task<IActionResult> LoginUser([FromBody] UserCredentials User)
+        {
+            Dictionary<string, string> statusMap = await _userService.LoginUser(User);
+
             statusMap.TryGetValue("statusCode", out string code);
             statusMap.TryGetValue("message", out string message);
 

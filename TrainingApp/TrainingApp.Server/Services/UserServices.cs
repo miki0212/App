@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using TrainingApp.Server.Data;
@@ -84,11 +85,28 @@ public class UserService
 
         return messages;
     }
-    public async Task<string> LoginUser(){
-        
-        
-        
-        return "";
+    public async Task<Dictionary<string, string>> LoginUser(UserCredentials user)
+    {
+        Dictionary<string, string> messages = new Dictionary<string, string>();
+        using (FitAppContext context = new FitAppContext(_configuration))
+        {
+            string hashedPassword = await HashedPassword(user.Password);
+            var existsUser = context.Users.FirstOrDefault(t => t.Login == user.Login && t.Haslo == hashedPassword);
+
+            if(existsUser == null)
+            {
+                messages.Add("statusCode", "2");
+                messages.Add("message", "B³êdny login lub has³o !!!");
+                return messages;
+            }
+
+            messages.Add("statusCode", "0");
+            messages.Add("message", "Zalogowano !!!");
+
+
+        }
+
+        return messages;
     }
     private async Task<string> HashedPassword(string password){
         using (SHA256 sha256Hash = SHA256.Create())
