@@ -8,76 +8,39 @@ namespace TrainingApp.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : ControllerBase, IUserController
     {
-        //private readonly AppDbContext _dbContext;
-        public UserController(ILogger<WeatherForecastController> logger)
+        private readonly ILogger<UserController> _logger;
+        private readonly IConfiguration _configuration;
+        private UserService _userService;
+
+        public UserController(ILogger<UserController> logger, IConfiguration configuration)
         {
-            //_dbContext = dbContext;
+            _userService = new UserService(configuration);
+            _logger = logger;
+            _configuration = configuration;
         }
 
         [HttpPost(Name = "registerUser")]
-        public async Task<bool> RegisterUser(string login,string password)
+        public async Task<IActionResult> RegisterUser([FromBody] UserCredentials User)
         {
+            Dictionary<string, string> statusMap = await _userService.RegisterUser(User);
+            
+            statusMap.TryGetValue("statusCode", out string code);
+            statusMap.TryGetValue("message", out string message);
 
-            using (FitAppContext context = new FitAppContext()) 
+            if (int.Parse(code) == 0)
             {
-                var newUser = new User
-                {
-                    Login = login,
-                    Imie = "Antoni",
-                    Nazwisko = "Testowy",
-                    Email = "antoni.testowy@wp.pl",
-                    Haslo = "12345"
-                };
-
-                context.Users.Add(newUser);
-                context.SaveChanges();
+                return Ok(message);
             }
-       
-
-
-            ////string connectionString = "Server=localhost\\MSSQLSERVER01;Database=FitApp;Trusted_Connection=True;";
-            //string connectionString = "Server=localhost\\MSSQLSERVER01;Database=FitApp;Integrated Security=True;Trusted_Connection=True;";
-
-
-            //// Dane do wstawienia
-            ////string login1 = "john_doe";
-            //string email = "john.doe@example.com";
-            ////string password = "securepassword";
-
-            //// Zapytanie SQL
-            //string insertQuery = "INSERT INTO [User] (Login, Email, Haslo) VALUES (@Login, @Email, @Haslo)";
-
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            // {
-            //    try
-            //    {
-            //        connection.Open();
-
-            //        // Tworzenie obiektu SqlCommand
-            //        using (SqlCommand command = new SqlCommand(insertQuery, connection))
-            //        {
-            //            // Dodawanie parametrów do zapytania SQL
-            //            command.Parameters.AddWithValue("@Login", login);
-            //            command.Parameters.AddWithValue("@Email", email);
-            //            command.Parameters.AddWithValue("@Haslo", password);
-
-            //            // Wykonanie zapytania
-            //            int rowsAffected = command.ExecuteNonQuery();
-
-            //            Console.WriteLine("Liczba wstawionych rekordów: " + rowsAffected);
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine("B³¹d: " + ex.Message);
-            //    }
-            //}
-
-
-            Console.WriteLine($"Dodano uzytkownika : {login}");
-            return true;
+            else if (int.Parse(code) == 1)
+            {
+                return NotFound(message);
+            }
+            else
+            {
+                return Conflict(message);
+            }
         }
     }
 }

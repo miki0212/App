@@ -1,56 +1,54 @@
 /* Styl kontenera */
 .container-register h1 {
 	font-family: Arial, sans-serif;
-	color: #666; /* Kolor tekstu */
+	color: #666;
 }
 
 .container-register {
-	margin: 0 auto; /* Wyœrodkowanie kontenera */
-	padding: 20px; /* Wewnêtrzny odstêp */
-	background-color: #f2f2f2; /* Kolor t³a */
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #f2f2f2;
 	border-radius: 8px;
-	color: #666; /* Kolor tekstu */
+	color: #666; 
 
 	background-color: rgba(255, 255, 255, 0.6);
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Cieñ */
-	filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2)); /* Filtr cienia */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
 }
 
 /* Styl nag³ówka */
 h1 {
-	color: #333; /* Kolor tekstu */
-	font-family: Arial, sans-serif; /* Rodzina czcionek */
-	text-align: center; /* Wyœrodkowanie tekstu */
-	margin-bottom: 20px; /* Odleg³oœæ od elementów poni¿ej */
+	color: #333;
+	font-family: Arial, sans-serif;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 /* Styl dla ka¿dego elementu formularza */
 .input-element-register {
-	min-width : 400px;
-	padding : 10px;
+	min-width: 400px;
+	padding: 10px;
 	margin-bottom: 15px;
-	font-weight:900;
-	font-size:18px;
+	font-weight: 900;
+	font-size: 18px;
 }
 
-	/* Styl etykiet */
-	.input-element-register label {
-		display: block; /* Sprawia, ¿e etykieta zajmuje ca³¹ szerokoœæ */
-		margin-bottom: 5px; /* Odleg³oœæ od pola formularza */
-		color: #666; /* Kolor tekstu */
-		font-family: Arial, sans-serif; /* Rodzina czcionek */
-	}
+/* Styl etykiet */
+.input-element-register label {
+	display: block;
+	margin-bottom: 5px;
+	color: #666;
+	font-family: Arial, sans-serif;
+}
 
-	/* Styl pól formularza */
-	.input-element-register input[type="text"],
-	.input-element-register input[type="email"],
-	.input-element-register input[type="password"] {
-		width: 100%; /* Szerokoœæ pola */
-		padding: 10px; /* Wewnêtrzny odstêp */
-		border: 1px solid #ccc; /* Obramowanie */
-		border-radius: 4px; /* Zaokr¹glenie rogów */
-		box-sizing: border-box; /* Zapewnia, ¿e padding i border s¹ wliczone w szerokoœæ i wysokoœæ */
-	}
+/* Styl pól formularza */
+.input-element-register input{
+	width: 100%;
+	padding: 10px;
+	/*border: 1px solid #ccc;*/
+	border-radius: 4px;
+	box-sizing: border-box;
+}
 
 /* Zwiêksza u¿ytecznoœæ przez zmianê kursora na wskaŸnik gdy najedziemy na przycisk */
 input[type="submit"]:hover {
@@ -60,19 +58,43 @@ input[type="submit"]:hover {
 
 /* Styl przycisku */
 .container-register button[type="submit"] {
-	width: 100%; /* Szerokoœæ przycisku */
-	padding: 10px 0; /* Wewnêtrzny odstêp w pionie */
-	background-color: #4CAF50; /* Kolor t³a przycisku */
-	color: white; /* Kolor tekstu */
-	font-family: Arial, sans-serif; /* Rodzina czcionek */
-	font-size: 16px; /* Rozmiar czcionki */
-	border: none; /* Brak obramowania */
-	border-radius: 4px; /* Zaokr¹glenie rogów */
-	cursor: pointer; /* Kursor wskazuj¹cy */
-	transition: background-color 0.3s ease; /* Animacja zmiany koloru t³a */
+	width: 100%;
+	padding: 10px 0;
+	background-color: #4CAF50;
+	color: white;
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
 }
 
 	/* Styl przycisku przy najechaniu */
 	.container-register button[type="submit"]:hover {
-		background-color: #45a049; /* Ciemniejszy kolor t³a */
+		background-color: #45a049;
 	}
+
+.error-message {
+	position: absolute;
+	
+	color: red;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.normal-border-input-register {
+	border: 1px solid #ccc;
+}
+
+.error-border {
+	border : 1px solid red;
+}
+
+.register-message {
+	text-align:center;
+	font-weight:800;
+	font-size:18px;
+}
+.error-register {
+	color : red;
+}

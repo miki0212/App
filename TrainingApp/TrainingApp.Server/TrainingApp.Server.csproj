@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -35,6 +35,13 @@
     <ProjectReference Include="..\trainingapp.client\trainingapp.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\IControllers\" />
+    <Folder Include="Classes\" />
+    <Folder Include="Nowy folder\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
