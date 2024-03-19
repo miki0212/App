@@ -1,4 +1,3 @@
-import { createHash } from 'crypto';
 import IAnswerMessage from '../../Interfaces/IAnswerMessage';
 import INewUser from '../../Interfaces/INewUser';
 import { validateNewUser, validatePsswordR } from '../Validation/ValidateUser';

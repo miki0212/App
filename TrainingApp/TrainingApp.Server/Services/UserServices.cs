@@ -44,29 +44,52 @@ public class UserService
 
                 string hashedPassword = await HashedPassword(user.Password);
 
-                User newUser = new User
-                {
-                    Login = user.Login,
-                    Imie = user.Name,
-                    Nazwisko = user.Lastname,
-                    Email = user.Email,
-                    Haslo = hashedPassword
-                };
 
-                context.Users.Add(newUser);
-                context.SaveChanges();
+                using (var dbTransaction = context.Database.BeginTransaction()) {
+                    try
+                    {
+                        User newUser = new User
+                        {
+                            Login = user.Login,
+                            Imie = user.Name,
+                            Nazwisko = user.Lastname,
+                            Email = user.Email,
+                            Haslo = hashedPassword
+                        };
+
+                        context.Users.Add(newUser);
+                        await context.SaveChangesAsync();
+                        await dbTransaction.CommitAsync();
+
+                        messages.Add("statusCode", "0");
+                        messages.Add("message", "Uzytkownik zosta³ zarejestrowany !!!");
+                    }
+                    catch (Exception ex)
+                    {
+                        await dbTransaction.RollbackAsync();
+                        messages.Add("statusCode", "1");
+                        messages.Add("message", "Wyst¹pi³ b³¹d podczas zapisu do bazy, spróbuj póŸniej !!!");
+                    }
+                }
+
+
             }
             catch (Exception ex)
             {
                 messages.Add("statusCode", "1");
-                messages.Add("message", "Wyst¹pi³ b³¹d podczas dodawania u¿ytkownika !!! Spróbuj ponownie póŸniej !!1");
+                messages.Add("message", "Wyst¹pi³ b³¹d podczas dodawania u¿ytkownika !!! Spróbuj ponownie póŸniej !!!");
                 return messages;
             }
-            messages.Add("statusCode", "0");
-            messages.Add("message", "Uzytkownik zosta³ zarejestrowany !!!");
+
         }
 
         return messages;
+    }
+    public async Task<string> LoginUser(){
+        
+        
+        
+        return "";
     }
     private async Task<string> HashedPassword(string password){
         using (SHA256 sha256Hash = SHA256.Create())
