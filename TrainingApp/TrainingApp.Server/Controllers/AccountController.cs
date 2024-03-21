@@ -8,13 +8,13 @@ namespace TrainingApp.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase, IUserController
+    public class AccountController : ControllerBase, IAccountController
     {
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<AccountController> _logger;
         private readonly IConfiguration _configuration;
         private UserService _userService;
 
-        public UserController(ILogger<UserController> logger, IConfiguration configuration)
+        public AccountController(ILogger<AccountController> logger, IConfiguration configuration)
         {
             _userService = new UserService(configuration);
             _logger = logger;
@@ -44,7 +44,6 @@ namespace TrainingApp.Server.Controllers
             }
         }
 
-        //[HttpPost(Name = "loginUser")]
         [HttpPost("login", Name = "LoginUser")]
         public async Task<IActionResult> LoginUser([FromBody] UserCredentials User)
         {

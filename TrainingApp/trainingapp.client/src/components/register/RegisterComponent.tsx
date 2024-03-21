@@ -93,7 +93,7 @@ export default function RegisterComponent() {
 
 		if (flag) {
 
-			const url = new URL('https://localhost:7087/User/register');
+			const url = new URL('https://localhost:7087/Account/register');
 
 			await fetch(url, {
 				method: 'POST',
@@ -167,6 +167,7 @@ export default function RegisterComponent() {
 
 	return (
 		<div>
+			<Link to="/">Login</Link>
 			<div className="container-register">
 				<h1>Rejestracja</h1>
 				<div className={`input-element-register`} >

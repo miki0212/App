@@ -3,7 +3,10 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using TrainingApp.Server.Data;
@@ -100,10 +103,18 @@ public class UserService
                 return messages;
             }
 
-            messages.Add("statusCode", "0");
-            messages.Add("message", "Zalogowano !!!");
-
-
+            try
+            {
+                var token = GenerateToken(user.Login);
+                messages.Add("statusCode", "0");
+                messages.Add("message", token);
+            }
+            catch (Exception ex)
+            {
+                messages.Add("statusCode", "2");
+                messages.Add("message", "Wystapil problem z logowaniem !!!");
+                return messages;
+            }
         }
 
         return messages;
@@ -124,5 +135,21 @@ public class UserService
 
             return builder.ToString();
         }
-    } 
+    }
+
+    private string GenerateToken(string login)
+    {
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: "token",
+            audience: "user",
+            claims: new[] { new Claim("username", login) },
+            expires: DateTime.Now.AddMinutes(20),
+            signingCredentials: creds
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
 }

@@ -56,7 +56,7 @@ export default function LoginComponent() {
 		if (flag) {
 			if (flag) {
 
-				const url = new URL('https://localhost:7087/User/login');
+				const url = new URL('https://localhost:7087/Account/login');
 
 				await fetch(url, {
 					method: 'POST',
@@ -80,7 +80,9 @@ export default function LoginComponent() {
 					})
 					.then(data => {
 						console.log(data)
-						setResponseServerMessage(data);
+						window.location.href = '/user/UserMainPage';
+						localStorage.setItem('userToken', data);
+						//setResponseServerMessage(data);
 						return data;
 					})
 					.catch(() => {
