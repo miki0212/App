@@ -1,0 +1,68 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	margin-top: 20px;
+	width: 100%;
+	min-width:300px;
+	max-width: 400px; /* Ogranicza szerokoœæ formularza, aby nie by³ zbyt szeroki na du¿ych ekranach */
+	background-color: #f8f9fa;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input, .select {
+	padding: 8px;
+	width: calc(100% - 16px); /* Koryguje szerokoœæ, aby uwzglêdniæ padding */
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	font-size: 16px; /* Zwiêksza czytelnoœæ */
+}
+option {
+	width: 100%;
+}
+.select {
+	width:100%;
+	background-color: white;
+	cursor: pointer;
+}
+
+.button {
+	padding: 10px 20px;
+	cursor: pointer;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	margin-top: 10px;
+	transition: background-color 0.3s ease; /* Dodaje animacjê dla lepszego UX */
+}
+
+	.button:hover {
+		background-color: #0056b3; /* Ciemniejszy odcieñ niebieskiego przy najechaniu */
+	}
+
+.label {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 5px;
+	width: 100%; /* Zapewnia, ¿e etykieta zajmuje ca³¹ dostêpn¹ szerokoœæ */
+}
+
+	.label label {
+		font-weight: bold; /* Podkreœla etykietê */
+	}
+
+/* Dodatkowe style dla poprawy ogólnej estetyki */
+/*body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #e9ecef;
+	font-family: Arial, sans-serif;
+}*/

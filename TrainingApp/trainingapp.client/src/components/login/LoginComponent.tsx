@@ -2,6 +2,8 @@ import { useState } from "react"
 import { IUserCredentials } from "../../Interfaces/IUserCredentials";
 import IAnswerMessage from "../../Interfaces/IAnswerMessage";
 import { validateUserCredentials } from "../Validation/ValidateUser";
+import { Link } from 'react-router-dom'
+import  RequestMaker  from "../../Nowy folder/RequestMaker";
 
 
 
@@ -9,6 +11,8 @@ import { validateUserCredentials } from "../Validation/ValidateUser";
 
 
 export default function LoginComponent() {
+
+	const requestMaker = new RequestMaker('https://localhost:7087/');
 
 	const [login, setLogin] = useState("");
 	const [password, setPassword] = useState("");
@@ -23,11 +27,13 @@ export default function LoginComponent() {
 
 	function loginHandler(e: React.ChangeEvent): void {
 		let loginValue = (e.target as HTMLInputElement).value;
+		setErrorLogin(false);
 		setLogin(loginValue);
 	}
 
 	function passwordHandler(e: React.ChangeEvent): void {
 		let passwordValue = (e.target as HTMLInputElement).value;
+		setErrorPassword(false);
 		setPassword(passwordValue);
 	}
 
@@ -54,7 +60,9 @@ export default function LoginComponent() {
 		}
 
 		if (flag) {
+			let t = await requestMaker.post('Account/login', userCredentials);
 			if (flag) {
+
 
 				const url = new URL('https://localhost:7087/Account/login');
 
@@ -80,8 +88,8 @@ export default function LoginComponent() {
 					})
 					.then(data => {
 						console.log(data)
-						window.location.href = '/user/UserMainPage';
 						localStorage.setItem('userToken', data);
+						window.location.href = '/user/UserMainPage';
 						//setResponseServerMessage(data);
 						return data;
 					})
@@ -95,6 +103,7 @@ export default function LoginComponent() {
 
 	return (
 		<div>
+			
 			<div className="container-register">
 				<h1>Logowanie</h1>
 				<div className={`input-element-register`} >
@@ -117,7 +126,9 @@ export default function LoginComponent() {
 				<div className="register-message">
 					{<div className={`${errorLogin ? 'error-register' : ''} register-message`}>{responseServerMessage}</div>}
 				</div>
-
+				<button className="go-to-register">
+					<Link className="link" to="/register">Nie masz konta? Zaloz je</Link>
+				</button>
 
 			</div>
 		</div>

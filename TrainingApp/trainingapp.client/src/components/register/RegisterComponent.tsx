@@ -1,8 +1,11 @@
 import IAnswerMessage from '../../Interfaces/IAnswerMessage';
 import INewUser from '../../Interfaces/INewUser';
 import { validateNewUser, validatePsswordR } from '../Validation/ValidateUser';
-import './RegisterComponentStyle.css';
 import { ChangeEvent, useState } from 'react';
+import { Link } from 'react-router-dom'
+
+import './RegisterComponentStyle.css';
+
 
 export default function RegisterComponent() {
 
@@ -167,7 +170,6 @@ export default function RegisterComponent() {
 
 	return (
 		<div>
-			<Link to="/">Login</Link>
 			<div className="container-register">
 				<h1>Rejestracja</h1>
 				<div className={`input-element-register`} >
@@ -193,7 +195,7 @@ export default function RegisterComponent() {
 					<input type="email" max="150" value={email} onChange={(e) => emailHandler(e)} />
 					{errorEmail ? <div className="error-message">{errorEmailMessage}</div> : null}
 				</div>
-
+				<label></label>
 				<div className="input-element-register">
 					<label>Haslo</label>
 					<input type="password" max="50" value={password} onChange={(e) => passwordHandler(e)} />
@@ -214,6 +216,9 @@ export default function RegisterComponent() {
 				<div className="register-message">
 					{<div className={`${errorRegister ? 'error-register' : ''} register-message`}>{responseServerMessage}</div>}
 				</div>
+				<button className="go-to-register">
+					<Link className="link" to="/">Masz konto? Zaloguj sie</Link>
+				</button>
 
 
 			</div>

@@ -11,5 +11,6 @@
   <ItemGroup>
     <Folder Include="src\components\Validation\" />
     <Folder Include="src\Interfaces\" />
+    <Folder Include="src\Nowy folder\" />
   </ItemGroup>
 </Project>

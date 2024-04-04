@@ -9,8 +9,16 @@ export default function MainPageUserController() {
 	useState(() => {
 		const token = localStorage.getItem('userToken');
 
-		if (token != null && isTokenExpired(token)) {
+		if (token != null ) {
 			setIsLoggedIn(true)
+			try {
+				const decodedToken = jwtDecode(token);
+				console.log(decodedToken.username);
+				return decodedToken;
+			} catch (error) {
+				console.error('B³¹d dekodowania tokena:', error);
+				return null;
+			}
 		}
 		else {
 			setIsLoggedIn(false);
@@ -31,10 +39,16 @@ export default function MainPageUserController() {
 		return false;
 	}
 
+	function logout() {
+		localStorage.removeItem('userToken');
+		window.location.href = '/';
+	}
+
 	return (
 		<>
-			TEST STRONY PO ZALOGOWANIU
-			<button>Wyloguj Sie</button>
+			<div>Witaj </div>
+			<button onClick={() => { window.location.href = "/user/UserProfile" }}>Profil</button>
+			<button onClick={()=>logout()}>Wyloguj Sie</button>
 		</>
 	)
 }
