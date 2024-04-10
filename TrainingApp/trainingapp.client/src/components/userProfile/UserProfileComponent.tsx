@@ -1,6 +1,8 @@
 import { useState } from "react";
 import './UserProfileStyle.css'; // Upewnij siê, ¿e œcie¿ka do pliku CSS jest poprawna
 import { error } from "console";
+import Navigation from "../navigation/Navigation";
+import Header from "../header/Header";
 
 export default function UserProfileComponent() {
 	const [profile, setProfile] = useState({
@@ -76,10 +78,13 @@ export default function UserProfileComponent() {
 	//};
 
 	return (
-		<div>
-			<button onClick={() => { window.location.href = "/user/UserMainPage" }}>Storna glowna</button>
+		<div className="main-container">
+
+			<Header/>
+			<Navigation/>
 			<form onSubmit={handleSubmit} className="form">
 				<h2>Profil Uzytkownika</h2>
+
 				<div className="label">
 					<label>
 						Waga (kg):

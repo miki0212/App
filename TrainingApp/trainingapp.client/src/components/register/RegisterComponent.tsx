@@ -96,7 +96,7 @@ export default function RegisterComponent() {
 
 		if (flag) {
 
-			const url = new URL('https://localhost:7087/Account/register');
+			const url = new URL('https://localhost:53937/Account/register');
 
 			await fetch(url, {
 				method: 'POST',

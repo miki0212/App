@@ -12,7 +12,7 @@ import  RequestMaker  from "../../Nowy folder/RequestMaker";
 
 export default function LoginComponent() {
 
-	const requestMaker = new RequestMaker('https://localhost:7087/');
+	const requestMaker = new RequestMaker('https://localhost:53937/');
 
 	const [login, setLogin] = useState("");
 	const [password, setPassword] = useState("");
@@ -64,7 +64,7 @@ export default function LoginComponent() {
 			if (flag) {
 
 
-				const url = new URL('https://localhost:7087/Account/login');
+				const url = new URL('https://localhost:53937/Account/login');
 
 				await fetch(url, {
 					method: 'POST',
