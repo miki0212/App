@@ -1,4 +1,5 @@
 export default function Navigation() {
+
     return (
 
         <nav className="navigation">
@@ -7,7 +8,7 @@ export default function Navigation() {
                 <li><button onClick={() => { window.location.href = "/user/UserProfile" }}>Profil</button></li>
                 <li><button>Posilki</button></li>
                 <li><button>Cwiczenia</button></li>
-             
+
             </ul>
         </nav>
     )
