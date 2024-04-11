@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom'
 
 import './RegisterComponentStyle.css';
+import { ENDPOINT, LINK } from '../../ENDPOINTS';
 
 
 export default function RegisterComponent() {
@@ -95,8 +96,7 @@ export default function RegisterComponent() {
 		}
 
 		if (flag) {
-
-			const url = new URL('https://localhost:53937/Account/register');
+			const url = new URL(`${LINK}${ENDPOINT.ACCOUNT.REGISTER}`);
 
 			await fetch(url, {
 				method: 'POST',

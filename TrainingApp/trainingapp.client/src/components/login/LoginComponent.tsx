@@ -4,6 +4,7 @@ import IAnswerMessage from "../../Interfaces/IAnswerMessage";
 import { validateUserCredentials } from "../Validation/ValidateUser";
 import { Link } from 'react-router-dom'
 import  RequestMaker  from "../../Nowy folder/RequestMaker";
+import { ENDPOINT, LINK } from "../../ENDPOINTS";
 
 
 
@@ -12,7 +13,7 @@ import  RequestMaker  from "../../Nowy folder/RequestMaker";
 
 export default function LoginComponent() {
 
-	const requestMaker = new RequestMaker('https://localhost:53937/');
+	const requestMaker = new RequestMaker('https://localhost:7087/');
 
 	const [login, setLogin] = useState("");
 	const [password, setPassword] = useState("");
@@ -60,11 +61,9 @@ export default function LoginComponent() {
 		}
 
 		if (flag) {
-			let t = await requestMaker.post('Account/login', userCredentials);
+			//let t = await requestMaker.post('Account/login', userCredentials);
 			if (flag) {
-
-
-				const url = new URL('https://localhost:53937/Account/login');
+				const url = new URL(`${LINK}${ENDPOINT.ACCOUNT.LOGIN}`);
 
 				await fetch(url, {
 					method: 'POST',
