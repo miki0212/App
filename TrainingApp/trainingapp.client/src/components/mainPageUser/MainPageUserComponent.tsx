@@ -70,9 +70,9 @@ const MainPageUserController: React.FC<MainPageUserControllerProps> = ({ usernam
             <Navigation></Navigation>
 
             <div className="components-container">
-                <div className="component" id="component-1">Komponent 1</div>
-                <div className="component" id="component-2">Komponent 2</div>
-                <div className="component" id="component-3">Komponent 3</div>
+                <div className="component" id="component-1">Lista Cwiczen</div>
+                <div className="component" id="component-2">Zapotrzebowanie kaloryczne</div>
+                <div className="component" id="component-3">Lista posilkow</div>
             </div>
         </div>
     );

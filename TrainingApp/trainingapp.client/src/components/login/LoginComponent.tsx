@@ -87,7 +87,7 @@ export default function LoginComponent() {
 					})
 					.then(data => {
 						console.log(data)
-						localStorage.setItem('userToken', data);
+						localStorage.setItem('userToken`', data);
 						window.location.href = '/user/UserMainPage';
 						//setResponseServerMessage(data);
 						return data;
