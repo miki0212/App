@@ -4,13 +4,40 @@
 	color: #666;
 }
 
-.container-register {
-	margin: 0 auto;
-	padding: 20px;
+/*.container-register {
+	height:1vh;
+	border:2px solid red;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-content:center;
+	padding: 10px 20px 20px 20px;
 	background-color: #f2f2f2;
 	border-radius: 8px;
-	color: #666; 
+	color: #666;
+	background-color: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
+}*/
 
+.container-register {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 95vh;
+	background-color: transparent;
+}
+
+.register-form {
+	border: 2px solid black;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	padding: 10px 20px 20px 20px;
+	background-color: #f2f2f2;
+	border-radius: 8px;
+	color: #666;
 	background-color: rgba(255, 255, 255, 0.6);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
@@ -33,22 +60,22 @@ h1 {
 	font-size: 18px;
 }
 
-/* Styl etykiet */
-.input-element-register label {
-	display: block;
-	margin-bottom: 5px;
-	color: #666;
-	font-family: Arial, sans-serif;
-}
+	/* Styl etykiet */
+	.input-element-register label {
+		display: block;
+		margin-bottom: 5px;
+		color: #666;
+		font-family: Arial, sans-serif;
+	}
 
-/* Styl pól formularza */
-.input-element-register input{
-	width: 100%;
-	padding: 10px;
-	/*border: 1px solid #ccc;*/
-	border-radius: 4px;
-	box-sizing: border-box;
-}
+	/* Styl pól formularza */
+	.input-element-register input {
+		width: 100%;
+		padding: 10px;
+		/*border: 1px solid #ccc;*/
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
 
 /* Zwiêksza u¿ytecznoœæ przez zmianê kursora na wskaŸnik gdy najedziemy na przycisk */
 input[type="submit"]:hover {
@@ -77,7 +104,6 @@ input[type="submit"]:hover {
 
 .error-message {
 	position: absolute;
-	
 	color: red;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -87,14 +113,129 @@ input[type="submit"]:hover {
 }
 
 .error-border {
-	border : 1px solid red;
+	border: 1px solid red;
 }
 
 .register-message {
-	text-align:center;
-	font-weight:800;
-	font-size:18px;
+	text-align: center;
+	font-weight: 800;
+	font-size: 18px;
 }
+
 .error-register {
-	color : red;
+	color: red;
 }
+
+.go-to-register {
+	border: none;
+	display: flex;
+	font-weight: 25px;
+	/*border:2px solid black;*/
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	text-align: center;
+	background: #3366ff;
+	cursor:pointer;
+}
+
+.link {
+	width: 100%;
+	text-decoration: none;
+	text-align: center;
+	/*font-weight:bold;*/
+	font-size: 16px;
+	color: white;
+}
+
+.go-to-register:hover {
+	background: #668cff;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.input, .select {
+	padding: 8px;
+	width: 200px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+.select {
+	width: 214px; /* Dostosowanie do szerokoœci z padding */
+	background-color: white;
+}
+
+.button {
+	padding: 10px 20px;
+	cursor: pointer;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+
+.label {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 5px;
+}
+
+.main-container {
+	font-family: 'Arial', sans-serif;
+}
+
+/*.navigation ul {
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	padding: 0;
+
+	margin-top: 70px;
+}
+
+.navigation li {
+	margin: 0 10px;
+}
+
+.navigation button {
+	padding: 10px 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: white;
+	cursor: pointer;
+	width: 150px;
+	height: 50px;
+}
+
+	.navigation button:hover {
+		background-color: #f0f0f0;
+	}*/
+
+.components-container {
+	display: grid;
+	grid-template-columns: repeat(3, 350px);
+	gap: 100px;
+	padding: 20px;
+	margin-top: 50px;
+}
+
+.component {
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 40px; /* Zwiêkszony padding dla wiêkszych kwadratów */
+	text-align: center;
+	height: 400px; /* Okreœla wysokoœæ komponentów */
+	/*width: 250px;*/
+}
+
+

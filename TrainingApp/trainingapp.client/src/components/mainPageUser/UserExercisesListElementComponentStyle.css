@@ -1,0 +1,35 @@
+.user-exercises-row {
+    display:flex;
+    border:2px solid violet;
+    justify-content:space-around;
+    padding:5px;
+    border-radius:5px;
+    margin-top:5px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.user-exercises-list-element {
+    text-align:center;
+    width:100px;
+}
+
+.user-exercies-choosen {
+    background-color:violet;
+}
+
+.user-add-exercises-repetitions-container {
+    position: absolute;
+    bottom: 40px;
+    width: 85%;
+    padding:0;
+    margin:0;
+    /*border:2px solid red;*/
+}
+
+.user-add-exercises-repetions-input {
+    width:95%;
+    text-align:center;
+    font-size:17px;
+    padding:5px;
+}

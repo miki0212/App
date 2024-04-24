@@ -1,0 +1,92 @@
+.navigation {
+    margin-top:100px;
+}
+.navigation ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    /*margin-top: 70px;*/
+}
+
+.navigation li {
+    margin: 0 10px;
+}
+
+    /*.navigation button {
+        border:none;
+        font-weight:600;*/
+        /*padding: 10px 20px;*/
+/*        border: 1px solid #000;
+        border-width: 0 0 2px 0px;*/
+        /*border-radius: 5px;*/
+        /*background-color: white;*/
+        /*background-color:transparent;
+        cursor: pointer;
+        min-width:150px;
+        width: 200px;
+        height: 35px;
+    }
+
+.navigation button:hover {*/
+    /*background-color: #f0f0f0;*/
+/*}*/
+.menu-button {
+    position: relative;
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    min-width: 150px;
+    width: 200px;
+    background-color: transparent;
+    font-weight: 600;
+    padding: 10px;
+    overflow: hidden;
+    border: 0;
+    /*border-width: 0px 2px 0 2px;*/
+    /*border-style: solid;*/
+    /*border-radius: 20px;*/
+    background-color: #78b1ed;
+    border-radius:10px;
+}
+
+    .menu-button::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 100%;
+        width: 50%;
+        height: 100%;
+        background-color: rgba(188, 216, 246,0.5);
+        /*border: 1px solid #000;*/
+        transform: translateX(0%);
+        transition: 1s transform;
+    }
+
+    .menu-button::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: -50%;
+        width: 50%;
+        height: 100%;
+        background-color:rgba(188, 216, 246,0.5);
+        /*border: 1px solid #000;*/
+        transform: translateX(-2%);
+        transition: 1s transform;
+    }
+    .menu-button:hover:before {
+        transform: translateX(100%);
+    }
+
+    .menu-button:hover::after {
+        transform: translateX(-100%);
+    }
+
+.menu-button-choosen {
+    overflow: hidden;
+    background-color: #3589e3;
+}

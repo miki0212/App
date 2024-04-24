@@ -1,0 +1,19 @@
+.user-exercises-container {
+    border:2px solid red;
+    height:100%;
+    position:relative;
+    display:flex;
+    justify-content:center;
+}
+
+.user-exercises-add-btn {
+    position:absolute;
+    bottom:0;
+    /*left:0;*/
+    margin:5px;
+    width:95%;
+    padding:5px;
+    border:1px solid violet;
+    border-radius:5px;
+    cursor:pointer;
+}

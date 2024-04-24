@@ -1,8 +1,13 @@
 import IAnswerMessage from '../../Interfaces/IAnswerMessage';
 import INewUser from '../../Interfaces/INewUser';
 import { validateNewUser, validatePsswordR } from '../Validation/ValidateUser';
-import './RegisterComponentStyle.css';
 import { ChangeEvent, useState } from 'react';
+import { Link } from 'react-router-dom'
+
+import './RegisterComponentStyle.css';
+import { ENDPOINT, LINK } from '../../ENDPOINTS';
+import { IUserProfileData } from '../../Interfaces/UserProfileData';
+
 
 export default function RegisterComponent() {
 
@@ -35,8 +40,6 @@ export default function RegisterComponent() {
 	const [responseServerMessage, setResponseServerMessage] = useState('');
 
 	const [errorRegister, setErrorRegister] = useState(false);
-
-
 
 	async function registerUser() {
 
@@ -92,8 +95,7 @@ export default function RegisterComponent() {
 		}
 
 		if (flag) {
-
-			const url = new URL('https://localhost:7087/User');
+			const url = new URL(`${LINK}${ENDPOINT.ACCOUNT.REGISTER}`);
 
 			await fetch(url, {
 				method: 'POST',
@@ -166,9 +168,10 @@ export default function RegisterComponent() {
 
 
 	return (
-		<div>
-			<div className="container-register">
+		<div className="container-register">
+			<div className="register-form">
 				<h1>Rejestracja</h1>
+
 				<div className={`input-element-register`} >
 					<label>Login</label>
 					<input type="text" className={`${errorLogin ? 'error-border' : 'normal-border-input-register '}`} max="50" value={login} onChange={(e) => loginHandler(e)} />
@@ -177,31 +180,31 @@ export default function RegisterComponent() {
 
 				<div className="input-element-register">
 					<label>Imie</label>
-					<input type="text" max="50" value={name} onChange={(e) => nameHandler(e)} />
+					<input type="text" className={`${errorName ? 'error-border' : 'normal-border-input-register '}`} max="50" value={name} onChange={(e) => nameHandler(e)} />
 					{errorName ? <div className="error-message">{errorNameMessage}</div> : <></>}
 				</div>
 
 				<div className="input-element-register">
 					<label>Nazwisko</label>
-					<input type="text" max="50" value={lastname} onChange={(e) => lastnameHandler(e)} />
+					<input type="text" max="50" className={`${errorLastname ? 'error-border' : 'normal-border-input-register '}`} value={lastname} onChange={(e) => lastnameHandler(e)} />
 					{errorLastname ? <div className="error-message">{errorLastnameMessage}</div> : <></>}
 				</div>
 
 				<div className="input-element-register">
 					<label>Email</label>
-					<input type="email" max="150" value={email} onChange={(e) => emailHandler(e)} />
+					<input type="email" className={`${errorEmail ? 'error-border' : 'normal-border-input-register '}`} max="150" value={email} onChange={(e) => emailHandler(e)} />
 					{errorEmail ? <div className="error-message">{errorEmailMessage}</div> : null}
 				</div>
-
+				<label></label>
 				<div className="input-element-register">
 					<label>Haslo</label>
-					<input type="password" max="50" value={password} onChange={(e) => passwordHandler(e)} />
+					<input type="password" className={`${errorPassword ? 'error-border' : 'normal-border-input-register '}`} max="50" value={password} onChange={(e) => passwordHandler(e)} />
 					{errorPassword && <div className="error-message">{errorPasswordMessage}</div>}
 				</div>
 
 				<div className="input-element-register">
 					<label>Powtorz Haslo</label>
-					<input type="password" max="50" value={passwordR} onChange={(e) => passwordRHandler(e)} />
+					<input type="password" max="50" className={`${errorPasswordR ? 'error-border' : 'normal-border-input-register '}`} value={passwordR} onChange={(e) => passwordRHandler(e)} />
 					{errorPasswordR && <div className="error-message">{errorPasswordRMessage}</div>}
 				</div>
 
@@ -213,6 +216,9 @@ export default function RegisterComponent() {
 				<div className="register-message">
 					{<div className={`${errorRegister ? 'error-register' : ''} register-message`}>{responseServerMessage}</div>}
 				</div>
+				<button className="go-to-register">
+					<Link className="link" to="/">Masz konto? Zaloguj sie</Link>
+				</button>
 
 
 			</div>

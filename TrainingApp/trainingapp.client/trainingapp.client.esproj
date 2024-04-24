@@ -9,7 +9,9 @@
     <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist</PublishAssetsDirectory>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\components\exercises\" />
     <Folder Include="src\components\Validation\" />
-    <Folder Include="src\Interfaces\" />
+    <Folder Include="src\Interfaces\Nowy folder\" />
+    <Folder Include="src\Nowy folder\" />
   </ItemGroup>
 </Project>

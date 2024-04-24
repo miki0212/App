@@ -1,0 +1,38 @@
+.add-exercise-container {
+    position: relative;
+    height:95%;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+}
+
+.user-exercises-list {
+    margin-top:10px;
+
+}
+
+.user-add-exercise-btn {
+    position: absolute;
+    bottom: 0;
+    display:flex;
+    width:100%;
+    justify-content:space-around;
+    flex-direction:column;
+}
+    .user-add-exercise-btn div {
+        display:flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .user-add-exercise-btn div button {
+        cursor: pointer;
+        border: none;
+        padding: 5px;
+        width: 45%;
+    }
+
+.status-message-div {
+position:absolute;
+bottom:-25px;
+}
