@@ -125,7 +125,7 @@ public class UserDataService
 
     public async Task<Dictionary<string, List<Exercises>>> GetExercisesPage(int pageNumber){
         Dictionary<string, List<Exercises>> exercisesMessage = new Dictionary<string, List<Exercises>>();
-        int pageSize = 10;
+        int pageSize = 6;
         List<Exercises> exercisesList = null;
         if (pageNumber > await GetMaxExercisesPage(pageSize)) {
             exercisesMessage.Add("messagge", exercisesList);
@@ -251,4 +251,27 @@ public class UserDataService
         }
     }
 
+    public async Task<Dictionary<string,List<ExerciseOne>>> GetUserExercisesPlan(int UserId = 1)
+    {
+        Dictionary<string, List<ExerciseOne>> exercisesMessage = new Dictionary<string, List<ExerciseOne>>();
+
+        using (FitAppContext context = new FitAppContext(_configuration))
+        {
+            var userPlan = context.UserExercisesPlan.Where(e => e.UserId == UserId).ToList();
+            List<ExerciseOne> exerciseList = new List<ExerciseOne>();
+            foreach(var exercise in userPlan)
+            {
+                var exercises = context.Exercises.FirstOrDefault(e=>e.Id==exercise.ExerciseId);
+                ExerciseOne exerciseOne = new ExerciseOne()
+                {
+                    ExerciseName = exercises.ExerciseName,
+                    Repeat = exercise.RepetitionsNumber
+                };
+            }
+
+            exercisesMessage.Add("message", exerciseList);
+
+            return exercisesMessage;
+        }
+    }
 }

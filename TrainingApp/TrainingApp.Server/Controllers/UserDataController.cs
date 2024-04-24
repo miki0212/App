@@ -75,7 +75,7 @@ namespace TrainingApp.Server.Controllers
         [HttpGet("getExercisesMaxPage", Name = "getExercisesMaxPage")]
         public async Task<IActionResult> GetExercisesMaxPage()
         {
-            int maxPage = await _userService.GetMaxExercisesPage(10);
+            int maxPage = await _userService.GetMaxExercisesPage(6);
 
             return Ok(maxPage);
         }
@@ -113,22 +113,22 @@ namespace TrainingApp.Server.Controllers
             }
         }
 
-        [HttpGet("getUserExercisesPlan", Name = "getUserExercisesPlan")]
-        public async Task<IActionResult> GetUserExercisesPlan(int UserId,string date = "")
-        {
-            Dictionary<string, bool> messageExercises = await _userService.GetUserExercisesPlan(UserId,date);
+        //[HttpGet("getUserExercisesPlan", Name = "getUserExercisesPlan")]
+        //public async Task<IActionResult> GetUserExercisesPlan(int UserId,string date = "")
+        //{
+        //    Dictionary<string, bool> messageExercises = await _userService.GetUserExercisesPlan(UserId,date);
 
-            messageExercises.TryGetValue("message", out bool exercise);
+        //    messageExercises.TryGetValue("message", out bool exercise);
 
-            if (exercise)
-            {
-                return Ok(exercise);
-            }
-            else
-            {
-                return Ok(exercise);
-            }
-        }
+        //    if (exercise)
+        //    {
+        //        return Ok(exercise);
+        //    }
+        //    else
+        //    {
+        //        return Ok(exercise);
+        //    }
+        //}
 
         [HttpPost("addUserExercisesPlan", Name = "addUserExercisesPlan")]
         public async Task<IActionResult> AddUserExercisesPlan([FromBody] DtoExercisesAddPlan newExercises)
@@ -145,6 +145,14 @@ namespace TrainingApp.Server.Controllers
             {
                 return BadRequest(false);
             }
+        }
+
+        [HttpGet("getUserExercisesPlan", Name = "getUserExercisesPlan")]
+        public async Task<IActionResult> GetUserExercisesPlan(int UserId)
+        {
+            var exerciseList = await _userService.GetUserExercisesPlan(UserId);
+            exerciseList.TryGetValue("message", out List<ExerciseOne> list);
+            return Ok(list);
         }
     }
 }

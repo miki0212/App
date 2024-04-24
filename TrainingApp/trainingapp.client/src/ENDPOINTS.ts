@@ -1,5 +1,5 @@
 
-export const PORT = 7087;
+export const PORT = 53342;
 export const LINK = `https://localhost:${PORT}`;
 
 export const ENDPOINT = {
@@ -19,6 +19,7 @@ export const ENDPOINT = {
 		ADDREMOVEFAVOURITEEXERCISES: "/UserData/addRemoveFavouriteExercise",
 
 		//Add Exercises to list 
-		ADDUSEREXERCISESPLAN: "/UserData/AddUserExercisesPlan"
+		ADDUSEREXERCISESPLAN: "/UserData/AddUserExercisesPlan",
+		GETUSEREXERCISESPLAN: "/UserData/getUserExercisesPlan?UserId={UserId}"
 	}
 }
