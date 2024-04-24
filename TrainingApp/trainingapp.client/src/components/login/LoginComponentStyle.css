@@ -1,0 +1,89 @@
+
+.container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+    background-color: transparent;
+}
+
+.login-form {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 10px 20px 20px 20px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    color: #666;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+
+.input-element-login{
+    min-width: 400px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+
+    .input-element-login label {
+        display: block;
+        margin-bottom: 5px;
+        color: #666;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Styl pól formularza */
+    .input-element-login input {
+        width: 100%;
+        padding: 10px;
+        /*border: 1px solid #ccc;*/
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+.normal-border-input-login {
+    border: 1px solid #ccc;
+}
+
+.error-login {
+    color: red;
+}
+
+.login-message {
+    text-align: center;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.go-to-register {
+    border: none;
+    display: flex;
+    font-weight: 25px;
+    /*border:2px solid black;*/
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    background: #3366ff;
+    cursor: pointer;
+}
+
+.container-login button[type="submit"] {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #4CAF50;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

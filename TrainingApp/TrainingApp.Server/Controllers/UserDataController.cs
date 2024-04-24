@@ -42,9 +42,109 @@ namespace TrainingApp.Server.Controllers
                 return Conflict(message);
             }
         }
-      
-        //public async Task<IActionResult> GetUserPrifile() { 
 
-        //}
+        [HttpGet("getProfilData", Name = "getProfilData")]
+        public async Task<IActionResult> GetUserData(int UserId)
+        {
+            Dictionary<string, UserDataDto> statusMap = await _userService.GetUserData(UserId);
+            statusMap.TryGetValue("UserData", out UserDataDto userData);
+
+            return Ok(userData);
+        }
+
+        [HttpGet("getExercises", Name = "getExercises")]
+        public async Task<IActionResult> GetExercises(int PageNumber) { 
+            Dictionary<string,List<Exercises>> messageExercises = await _userService.GetExercisesPage(PageNumber);
+
+            messageExercises.TryGetValue("message", out List<Exercises> exercise);
+
+            return Ok(exercise);   
+        }
+
+        [HttpGet("getExerciseByName", Name = "getExerciseByName")]
+        public async Task<IActionResult> GetExerciseByName(string searchString)
+        {
+            Dictionary<string, List<Exercises>> messageExercises = await _userService.GetExerciseByName(searchString);
+
+            messageExercises.TryGetValue("message", out List<Exercises> exercise);
+
+            return Ok(exercise);
+        }
+
+
+        [HttpGet("getExercisesMaxPage", Name = "getExercisesMaxPage")]
+        public async Task<IActionResult> GetExercisesMaxPage()
+        {
+            int maxPage = await _userService.GetMaxExercisesPage(10);
+
+            return Ok(maxPage);
+        }
+
+
+        //TODO : Move to other file
+        [HttpPost("addRemoveFavouriteExercise", Name = "addRemoveFavouriteExercise")]
+        public async Task<IActionResult> AddRemoveFavouriteExercise([FromBody]DtoExercisesFavourites exercisesFavourites)
+        {
+            Dictionary<string, bool> messageExercises = await _userService.AddRemoveFavouriteExercise(exercisesFavourites);
+
+            messageExercises.TryGetValue("message", out bool exercise);
+
+            //if (exercise) 
+            //{
+                return Ok(exercise);
+            //}
+           
+        }
+
+        [HttpPost("checkFavouriteExercises", Name = "checkFavouriteExercises")]
+        public async Task<IActionResult> CheckFavouriteExercises([FromBody] DtoExercisesFavourites exercisesFavourites)
+        {
+            Dictionary<string, bool> messageExercises = await _userService.CheckFavouriteExercises(exercisesFavourites);
+
+            messageExercises.TryGetValue("message", out bool exercise);
+
+            if (exercise)
+            {
+                return Ok(exercise);
+            }
+            else
+            {
+                return Ok(exercise);
+            }
+        }
+
+        [HttpGet("getUserExercisesPlan", Name = "getUserExercisesPlan")]
+        public async Task<IActionResult> GetUserExercisesPlan(int UserId,string date = "")
+        {
+            Dictionary<string, bool> messageExercises = await _userService.GetUserExercisesPlan(UserId,date);
+
+            messageExercises.TryGetValue("message", out bool exercise);
+
+            if (exercise)
+            {
+                return Ok(exercise);
+            }
+            else
+            {
+                return Ok(exercise);
+            }
+        }
+
+        [HttpPost("addUserExercisesPlan", Name = "addUserExercisesPlan")]
+        public async Task<IActionResult> AddUserExercisesPlan([FromBody] DtoExercisesAddPlan newExercises)
+        {
+            Dictionary<string, bool> messageExercises = await _userService.AddUserExercisesPlan(newExercises);
+
+            messageExercises.TryGetValue("message", out bool exercise);
+
+            if (exercise)
+            {
+                return Ok(exercise);
+            }
+            else
+            {
+                return BadRequest(false);
+            }
+        }
     }
 }

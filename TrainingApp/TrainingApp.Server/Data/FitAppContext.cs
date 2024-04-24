@@ -10,7 +10,7 @@ public partial class FitAppContext : DbContext
     private readonly IConfiguration _configuration;
     public FitAppContext(IConfiguration configuration)
     {
-        _configuration = configuration; 
+        _configuration = configuration;
     }
     public FitAppContext()
     {
@@ -23,6 +23,9 @@ public partial class FitAppContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<UserData> UsersData { get; set; }
+    public virtual DbSet<Exercises> Exercises { get; set; }
+    public virtual DbSet<ExerciseFavorites> ExerciseFavorites { get; set; }
+    public virtual DbSet<UserExercisesPlan> UserExercisesPlan { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -63,15 +66,51 @@ public partial class FitAppContext : DbContext
 
             entity.Property(e => e.UserId);
 
-            entity.Property(e => e.Height);
+            entity.Property(e => e.Height).HasColumnType("float");
 
-            entity.Property(e => e.Weight);
+            entity.Property(e => e.Weight).HasColumnType("float");
 
             entity.Property(e => e.Age);
 
             entity.Property(e => e.Sex);
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<Exercises>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.ExerciseName);
+
+            entity.Property(e => e.Difficult);
+
+            entity.Property(e => e.Category);
+
+            entity.Property(e => e.Equipment);
+        });
+
+        modelBuilder.Entity<ExerciseFavorites>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.UserId);
+
+            entity.Property(e => e.ExerciseId);
+        });
+
+
+        modelBuilder.Entity<UserExercisesPlan>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.UserId);
+
+            entity.Property(e => e.ExerciseId);
+
+            entity.Property(e => e.Data);
+
+            entity.Property(e => e.RepetitionsNumber);
         });
 
         OnModelCreatingPartial(modelBuilder);

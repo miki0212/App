@@ -4,10 +4,37 @@
 	color: #666;
 }
 
+/*.container-register {
+	height:1vh;
+	border:2px solid red;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-content:center;
+	padding: 10px 20px 20px 20px;
+	background-color: #f2f2f2;
+	border-radius: 8px;
+	color: #666;
+	background-color: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
+}*/
+
 .container-register {
-	margin: 0 auto;
-	margin-top:px;
-	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 95vh;
+	background-color: transparent;
+}
+
+.register-form {
+	border: 2px solid black;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	padding: 10px 20px 20px 20px;
 	background-color: #f2f2f2;
 	border-radius: 8px;
 	color: #666;
@@ -162,60 +189,17 @@ input[type="submit"]:hover {
 	gap: 5px;
 }
 
-
-
-
-
 .main-container {
 	font-family: 'Arial', sans-serif;
 }
 
-.header {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 20px;
-	background-color: #333;
-	color: white;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	box-sizing: border-box;
-}
-
-.logo {
-	position: absolute;
-	left: 20px;
-	font-size: 1.5em;
-	font-weight: bold;
-}
-
-.welcome {
-	font-size: 1.2em;
-}
-
-.logout-button {
-	position: absolute;
-	right: 20px;
-	padding: 10px 20px;
-	background-color: red;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-}
-
-	.logout-button:hover {
-		background-color: darkred;
-	}
-
-.navigation ul {
+/*.navigation ul {
 	display: flex;
 	justify-content: center;
 	list-style: none;
 	padding: 0;
-	margin-top: 0px;
+
+	margin-top: 70px;
 }
 
 .navigation li {
@@ -234,14 +218,14 @@ input[type="submit"]:hover {
 
 	.navigation button:hover {
 		background-color: #f0f0f0;
-	}
+	}*/
 
 .components-container {
 	display: grid;
 	grid-template-columns: repeat(3, 350px);
 	gap: 100px;
 	padding: 20px;
-	margin-top: 110px; /* Dodatkowe miejsce pod nawigacj¹ */
+	margin-top: 50px;
 }
 
 .component {

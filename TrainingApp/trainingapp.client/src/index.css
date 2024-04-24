@@ -69,13 +69,14 @@ button:focus-visible {
 */
 
 body {
-    background: #20005e;
-    background: #d7e8fb;
+    /*    background: #20005e;
+    background: #d7e8fb;*/
+    background: #111;
     width: 95vw;
-    height: 90vh;
+    height: 100vh;
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
 }

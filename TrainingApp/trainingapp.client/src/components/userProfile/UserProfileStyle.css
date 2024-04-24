@@ -1,12 +1,19 @@
-.form {
+.container-user-profile {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+.user-profile-form {
+	border: 2px solid black;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 10px;
-	margin-top: 20px;
+	margin-top: 50px;
 	width: 100%;
-	min-width:300px;
-	max-width: 400px; /* Ogranicza szerokoœæ formularza, aby nie by³ zbyt szeroki na du¿ych ekranach */
+	min-width: 300px;
+	max-width: 400px;
 	background-color: #f8f9fa;
 	padding: 20px;
 	border-radius: 8px;
@@ -15,10 +22,10 @@
 
 .input, .select {
 	padding: 8px;
-	width: calc(100% - 16px); /* Koryguje szerokoœæ, aby uwzglêdniæ padding */
+	width: calc(100% - 16px);
 	border-radius: 5px;
 	border: 1px solid #ccc;
-	font-size: 16px; /* Zwiêksza czytelnoœæ */
+	font-size: 16px;
 }
 option {
 	width: 100%;
@@ -29,7 +36,7 @@ option {
 	cursor: pointer;
 }
 
-.button {
+.user-proifle-button {
 	padding: 10px 20px;
 	cursor: pointer;
 	background-color: #007bff;
@@ -37,22 +44,24 @@ option {
 	border: none;
 	border-radius: 5px;
 	margin-top: 10px;
-	transition: background-color 0.3s ease; /* Dodaje animacjê dla lepszego UX */
+	transition: background-color 0.3s ease;
+	width: 100%;
+	font-size:17px;
 }
 
-	.button:hover {
-		background-color: #0056b3; /* Ciemniejszy odcieñ niebieskiego przy najechaniu */
+	.user-proifle-button:hover {
+		background-color: #0056b3;
 	}
 
-.label {
+.user-profile-label {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 5px;
-	width: 100%; /* Zapewnia, ¿e etykieta zajmuje ca³¹ dostêpn¹ szerokoœæ */
+	width: 100%;
 }
 
-	.label label {
+	.user-profile-label label {
 		font-weight: bold; /* Podkreœla etykietê */
 	}
 
@@ -66,3 +75,9 @@ option {
 	background-color: #e9ecef;
 	font-family: Arial, sans-serif;
 }*/
+
+
+.profile-data-container {
+	width : 250px;
+	height:700px;
+}

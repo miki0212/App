@@ -1,6 +1,5 @@
 import IAnswerMessage from "../../Interfaces/IAnswerMessage";
 import INewUser from "../../Interfaces/INewUser";
-import { IUserCredentials } from "../../Interfaces/IUserCredentials";
 
 function validateLogin(login: string): IAnswerMessage {
 	const message: IAnswerMessage = {
@@ -170,13 +169,6 @@ function validatePassword(password: string): IAnswerMessage {
 	}
 
 	return message;
-}
-export function validateUserCredentials(user: IUserCredentials): IAnswerMessage[] {
-	const messages: IAnswerMessage[] = [];
-	messages.push(validateLogin(user.login));
-	messages.push(validatePassword(user.password));
-
-	return messages;
 }
 
 export function validateNewUser(user: INewUser): IAnswerMessage[] {
