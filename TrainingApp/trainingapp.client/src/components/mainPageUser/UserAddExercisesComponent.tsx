@@ -21,12 +21,12 @@ export default function UserAddExerciseComponent(props: { isActiveAddExercise: b
 
     useEffect(() => {
         const token = localStorage.getItem('userToken');
-
+    
         if (token != null) {
             try {
                 const decodedToken = jwtDecode(token);
                 console.log(decodedToken)
-                console.log("TEST")
+              
                 setUserId(decodedToken.id as number);
             } catch (error) {
                 console.error('B³¹d dekodowania tokena:', error);

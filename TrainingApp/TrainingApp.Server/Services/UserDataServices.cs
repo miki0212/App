@@ -251,7 +251,7 @@ public class UserDataService
         }
     }
 
-    public async Task<Dictionary<string,List<ExerciseOne>>> GetUserExercisesPlan(int UserId = 1)
+    public async Task<Dictionary<string,List<ExerciseOne>>> GetUserExercisesPlan(int UserId)
     {
         Dictionary<string, List<ExerciseOne>> exercisesMessage = new Dictionary<string, List<ExerciseOne>>();
 
