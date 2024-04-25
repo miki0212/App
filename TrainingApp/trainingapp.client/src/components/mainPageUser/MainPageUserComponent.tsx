@@ -67,6 +67,7 @@ import { IDecodedToken } from '../../Interfaces/IDecodedToken';
 import { ENDPOINT, LINK } from '../../ENDPOINTS';
 import UserExercisesComponent from './UserExercises';
 import UserAddExerciseComponent from './UserAddExercisesComponent';
+import UserCaloricGoal from './CaloricGoal/UserCaloricGoal';
 
 
 
@@ -151,7 +152,9 @@ export default function MainPageUserController() {
                                     </>}
 
                             </div>
-                            <div className="component" id="component-2">Zapotrzebowanie kaloryczne</div>
+                            <div className="component" id="component-2">Zapotrzebowanie kaloryczne
+                                <UserCaloricGoal />
+                            </div>
                             <div className="component food-list-component" id="food-list-component">
                                 Lista posilkow
                                 <button>Dodaj Posilek</button>
