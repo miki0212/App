@@ -1,4 +1,4 @@
 export default interface IExercisesFavourites {
-    UserId: number,
+    UserId: string,
     ExerciseId : number,
 }

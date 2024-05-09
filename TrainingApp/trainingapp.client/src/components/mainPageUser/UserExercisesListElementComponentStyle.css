@@ -1,9 +1,10 @@
 .user-exercises-row {
+    width:95%;
     display:flex;
-    border:2px solid violet;
+    border:2px solid white;
     justify-content:space-around;
     padding:5px;
-    border-radius:5px;
+    border-radius:2px;
     margin-top:5px;
     text-align:center;
     cursor:pointer;
@@ -15,7 +16,7 @@
 }
 
 .user-exercies-choosen {
-    background-color:violet;
+    background-color: rgb(65, 65, 150);
 }
 
 .user-add-exercises-repetitions-container {
@@ -27,9 +28,4 @@
     /*border:2px solid red;*/
 }
 
-.user-add-exercises-repetions-input {
-    width:95%;
-    text-align:center;
-    font-size:17px;
-    padding:5px;
-}
+

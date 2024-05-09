@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import './NavigationComponentStyle.css'
 import { NavLink } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import DecodedTokenProperties from '../../helper/DecodedToken';
+import { IDecodedToken } from '../../Interfaces/IDecodedToken';
 //import { NavLink } from 'react-router-dom';
 export default function Navigation() {
     const [actualPage, setActualPage] = useState('');
@@ -31,24 +33,13 @@ export default function Navigation() {
     }
 
     useEffect(() => {
-        const token = localStorage.getItem('userToken');
+        const decodedToken: IDecodedToken = DecodedTokenProperties();
 
-        if (token != null) {
+        if (decodedToken != null && decodedToken.accountType === 'User') {
             setIsLogged(true);
-            try {
-                const decodedToken = jwtDecode(token);
-                console.log(decodedToken.username);
-
-                //return decodedToken;
-            } catch (error) {
-                console.error('B³¹d dekodowania tokena:', error);
-                //return null;
-            }
         }
         else {
             setIsLogged(false);
-            //setIsLoggedIn(false);
-            //window.location.href = '/user/UserMainPage';
         }
     })
 

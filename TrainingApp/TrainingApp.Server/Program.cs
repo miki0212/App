@@ -87,36 +87,36 @@ var tokenValidationParams = new TokenValidationParameters
     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("yourSecretKey")) // Klucz prywatny
 };
 
-app.UseAuthentication(); // Dodaj middleware uwierzytelniania JWT
-app.UseAuthorization(); // Dodaj middleware autoryzacji
+//app.UseAuthentication(); // Dodaj middleware uwierzytelniania JWT
+//app.UseAuthorization(); // Dodaj middleware autoryzacji
 
-app.Use(async (context, next) =>
-{
-    // SprawdŸ, czy nag³ówek Authorization zawiera token JWT
-    var authHeader = context.Request.Headers["Authorization"].ToString();
-    if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
-    {
-        var token = authHeader.Substring("Bearer ".Length).Trim();
+//app.Use(async (context, next) =>
+//{
+//    // SprawdŸ, czy nag³ówek Authorization zawiera token JWT
+//    var authHeader = context.Request.Headers["Authorization"].ToString();
+//    if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+//    {
+//        var token = authHeader.Substring("Bearer ".Length).Trim();
 
-        var tokenHandler = new JwtSecurityTokenHandler();
+//        var tokenHandler = new JwtSecurityTokenHandler();
 
-        try
-        {
-            // Spróbuj zweryfikowaæ token JWT
-            var claimsPrincipal = tokenHandler.ValidateToken(token, tokenValidationParams, out _);
+//        try
+//        {
+//            // Spróbuj zweryfikowaæ token JWT
+//            //var claimsPrincipal = tokenHandler.ValidateToken(token, tokenValidationParams, out _);
 
-            // Ustaw kontekst uwierzytelnienia na podstawie zweryfikowanego tokenu
-            context.User = claimsPrincipal;
-        }
-        catch (Exception ex)
-        {
-            // Obs³u¿ b³¹d weryfikacji tokenu JWT
-            Console.WriteLine($"B³¹d weryfikacji tokenu JWT: {ex.Message}");
-        }
-    }
+//            //// Ustaw kontekst uwierzytelnienia na podstawie zweryfikowanego tokenu
+//            //context.User = claimsPrincipal;
+//        }
+//        catch (Exception ex)
+//        {
+//            // Obs³u¿ b³¹d weryfikacji tokenu JWT
+//            Console.WriteLine($"B³¹d weryfikacji tokenu JWT: {ex.Message}");
+//        }
+//    }
 
-    await next();
-});
+//    await next();
+//});
 
 app.MapControllers();
 app.MapFallbackToFile("/index.html");

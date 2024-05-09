@@ -152,7 +152,8 @@ export default function MainPageUserController() {
                                     </>}
 
                             </div>
-                            <div className="component" id="component-2">Zapotrzebowanie kaloryczne
+                            <div className="calories-goal-component" id="component-2">
+                                <h3>Zapotrzebowanie kaloryczne</h3>
                                 <UserCaloricGoal />
                             </div>
                             <div className="component food-list-component" id="food-list-component">

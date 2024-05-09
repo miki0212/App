@@ -9,9 +9,15 @@
     <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist</PublishAssetsDirectory>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\adminPanel\blockUserAdmin\blockUserListElement\" />
+    <Folder Include="src\adminPanel\mainAdminPage\" />
+    <Folder Include="src\adminPanel\adminDataProvider\" />
     <Folder Include="src\components\exercises\" />
-    <Folder Include="src\components\Validation\" />
+    <Folder Include="src\Interfaces\Exercise\" />
+    <Folder Include="src\Interfaces\Meal\" />
+    <Folder Include="src\Interfaces\User\" />
     <Folder Include="src\Interfaces\Nowy folder\" />
+    <Folder Include="src\helper\" />
     <Folder Include="src\Nowy folder\" />
   </ItemGroup>
 </Project>

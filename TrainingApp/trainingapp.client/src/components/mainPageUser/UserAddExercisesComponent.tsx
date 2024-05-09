@@ -108,7 +108,7 @@ export default function UserAddExerciseComponent(props: { isActiveAddExercise: b
             <h2>Data : 04/21/2024 </h2>
             <h4>Wyszukaj cwiczenie</h4>
 
-            <input type='text' placeholder={`Wyszukaj cwiczenie`} onChange={searchExercisesByName} />
+            <input className={'user-add-exercise-input-search'} type='text' placeholder={`Wyszukaj cwiczenie`} onChange={searchExercisesByName} />
 
             <div className={`user-exercises-list`}>
                 {exercisesList?.length > 0 ?

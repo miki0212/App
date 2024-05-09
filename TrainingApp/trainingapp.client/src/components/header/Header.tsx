@@ -2,6 +2,8 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 import "./HeaderStyle.css";
+import { IDecodedToken } from "../../Interfaces/IDecodedToken";
+import DecodedTokenProperties from "../../helper/DecodedToken";
 
 export default function Header() {
 
@@ -15,13 +17,12 @@ export default function Header() {
 
 
     useEffect(() => {
-        const token = localStorage.getItem('userToken');
+        const token: IDecodedToken = DecodedTokenProperties();
 
-        if (token != null) {
+        if (token != null && window.location.href !== 'https://localhost:5173/' && window.location.href !== 'https://localhost:5173/admin/login') {
             setIsLogged(true);
             try {
-                const decodedToken = jwtDecode(token);
-                setUserLogin(decodedToken.username);
+                setUserLogin(token.login);
             } catch (error) {
                 console.error('B³¹d dekodowania tokena:', error);
             }

@@ -1,0 +1,40 @@
+.admin-privileges-container {
+    color: white;
+    display: flex;
+    /*border:2px solid red;*/
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:50px;
+
+
+    .admin-privileges-container-properties {
+        color: white;
+        background-color: rgb(65, 65, 90);
+        padding: 10px;
+        min-width: 350px;
+        min-height: 400px;
+
+        h2{
+            text-align:center;
+        }
+
+        .admin-privileges-value-row {
+            display: flex;
+            padding: 10px;
+
+            .admin-privileges-property {
+                width: 70%;
+                padding: 10px;
+                border: 2px solid white;
+            }
+
+            .admin-privileges-value {
+                width: 30%;
+                padding: 10px;
+                border: 2px solid white;
+                text-align:center;
+            }
+        }
+    }
+}

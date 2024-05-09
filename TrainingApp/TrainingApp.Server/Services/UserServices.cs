@@ -137,17 +137,19 @@ public class UserService
         }
     }
 
-    private string GenerateToken(string login,int id)
+    private string GenerateToken(string login, int id)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-
-
         var token = new JwtSecurityToken(
             issuer: "token",
             audience: "user",
-            claims: new[] { new Claim("username", login), new Claim("id", id.ToString()) },
+            claims: new[] {
+                new Claim("username", login),
+                new Claim("id", id.ToString()),
+                new Claim("accountType", "User")
+            },
             expires: DateTime.Now.AddMinutes(20),
             signingCredentials: creds
         );

@@ -1,0 +1,42 @@
+.user-exercises-history-container {
+    color: black;
+    /*border:2px solid violet;*/
+    height: 70%;
+    overflow: auto;
+    position:relative;
+}
+
+.user-exercises-history-row {
+    margin-top: 2px;
+    border: 2px solid white;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    padding: 7px;
+    margin: 12px;
+}
+.user-exercise-table-header {
+    color: white;
+    display: flex;
+    justify-content: center;
+    border: 2px solid wheat;
+    border-radius: 5px;
+    margin: 12px;
+    padding: 5px;
+    /*position: absolute;*/
+    background-color: rgb(65, 65, 90);
+    top:0px;
+}
+
+.user-exercise-table-name {
+    width:40%;
+    text-align:center;
+}
+.user-exercises-table-counter {
+    width:10%;
+}
+
+.user-exercises-table-element {
+    width: 40%;
+    text-align: center;
+}

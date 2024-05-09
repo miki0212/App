@@ -1,18 +1,36 @@
 .food-list-component {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    /*background-color: #f9f9f9;*/
+    /*border: 1px solid #ddd;*/
     border-radius: 5px;
-    padding: 10px; /* Zwiêkszony padding dla wiêkszych kwadratów */
+    padding: 10px;
     text-align: center;
-    height: 500px; /* Okreœla wysokoœæ komponentów */
+    height: 500px;
+    background-color: rgb(65, 65, 90);
+    color: white;
+}
+
+.calories-goal-component {
+    /*background-color: #f9f9f9;*/
+    /*border: 1px solid #ddd;*/
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    height: 500px;
+    background-color: rgb(65, 65, 90);
+    color:white;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 .component-exercise {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-color: rgb(65, 65, 90);
+    /*border: 1px solid #ddd;*/
     border-radius: 5px;
-    padding: 10px; /* Zwiêkszony padding dla wiêkszych kwadratów */
+    padding: 10px;
     text-align: center;
-    height: 500px; /* Okreœla wysokoœæ komponentów */
+    height: 500px; 
+    color:white;
     /*width: 250px;*/
 }

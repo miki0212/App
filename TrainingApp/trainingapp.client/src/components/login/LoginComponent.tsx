@@ -8,6 +8,9 @@ import { ENDPOINT, LINK } from "../../ENDPOINTS";
 
 import "./LoginComponentStyle.css";
 import { jwtDecode } from "jwt-decode";
+import { DEFAULT_HEADERS } from "../../helper/DefaultHeaders";
+import { IDecodedToken } from "../../Interfaces/IDecodedToken";
+import DecodedTokenProperties from "../../helper/DecodedToken";
 
 export default function LoginComponent() {
 
@@ -23,17 +26,10 @@ export default function LoginComponent() {
 	const [responseServerMessage, setResponseServerMessage] = useState("");
 
 	useEffect(() => {
-		const token = localStorage.getItem('userToken');
+		const token: IDecodedToken = DecodedTokenProperties();
 
-		if (token != null) {
+		if (token != null && token.accountType === 'User') {
 			window.location.href = '/user/UserMainPage';
-			try {
-				const decodedToken = jwtDecode(token);
-				console.log(decodedToken.username);
-
-			} catch (error) {
-				console.error('B³¹d dekodowania tokena:', error);
-			}
 		}
 		//else {
 		//	setIsLoggedIn(false);
@@ -82,10 +78,7 @@ export default function LoginComponent() {
 
 				await fetch(url, {
 					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'Access-Control-Allow-Origin': "*"
-					},
+					headers: DEFAULT_HEADERS,
 
 					body: JSON.stringify(userCredentials)
 				})

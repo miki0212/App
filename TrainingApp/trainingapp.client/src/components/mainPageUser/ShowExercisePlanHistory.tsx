@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "./UserExercisesComponentStyle.css"
+import "./ShowExercisesPlanHistoryStyle.css"
 import { ENDPOINT, LINK } from "../../ENDPOINTS"
 import { IUserExerciseList } from "../../Interfaces/IUserExercisesList";
 import { jwtDecode } from "jwt-decode";
@@ -8,6 +8,7 @@ export default function ShowExercisePlanHistory() {
 
     const [userExercisePlan, setUserExercisePlan] = useState<IUserExerciseList[]>();
     const [userId, setUserId] = useState('2');
+
     useEffect(() => {
         getToken();
     })
@@ -33,6 +34,9 @@ export default function ShowExercisePlanHistory() {
     }
     const fetchData = async () => {
         let url;
+        console.log("Elo : "+userExercisePlan)
+        console.log(userExercisePlan)
+
         if (userId === '') {
             url = `${LINK}${ENDPOINT.USERDATA.GETUSEREXERCISESPLAN.replace('{UserId}', '2')}`;
             setUserId('1')
@@ -56,19 +60,30 @@ export default function ShowExercisePlanHistory() {
                 throw new Error("GETUSEREXERCISESPLAN");
             }
         }).then(data => {
-            console.log(data);
+            //console.log(data);
             setUserExercisePlan(data as IUserExerciseList[]);
         })
     }
 
     return (
         <div className={`user-exercises-history-container`}>
-            {userExercisePlan?.map((exercises, index) => (
+            {userExercisePlan ?
                 <div>
-                    <div>{exercises.ExerciseName}</div>
-                    <div>{exercises.Repeat}</div>
+                    <div className={`user-exercise-table-header`}>
+                        <div className={`user-exercise-table-name`}>Nazwa</div>
+                        <div className={`user-exercise-table-name`}>Powtorzenia</div>
+                    </div>
+                    {userExercisePlan?.map((exercises, index) => (
+                        <div className={`user-exercises-history-row`} key={index}>
+                            <div className={`user-exercises-table-counter`}>{index+1}</div>
+                            <div className={`user-exercises-table-element`}>{exercises.exerciseName}</div>
+                            <div className={`user-exercises-table-element`}>{exercises.repeat}</div>
+                        </div>))}
                 </div>
-            ))}
+          
+                : <div> Brak Cwiczen</div>
+
+        }
         </div>
     )
 }

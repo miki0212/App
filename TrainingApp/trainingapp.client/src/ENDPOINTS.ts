@@ -1,5 +1,5 @@
 
-export const PORT = 53342;
+export const PORT = 7087;
 export const LINK = `https://localhost:${PORT}`;
 
 export const ENDPOINT = {
@@ -21,5 +21,11 @@ export const ENDPOINT = {
 		//Add Exercises to list 
 		ADDUSEREXERCISESPLAN: "/UserData/AddUserExercisesPlan",
 		GETUSEREXERCISESPLAN: "/UserData/getUserExercisesPlan?UserId={UserId}"
+	},
+	ADMIN: {
+		LOGINADMIN: "/Admin/loginAdmin",
+
+		GETADMINPRIVILEGES: '/Admin/getAdminPrivileges?adminId={adminId}',
+		ADD_ADMIN_EXERCISES: '/Admin/addAdminExercise'
 	}
 }

@@ -254,9 +254,13 @@ public class UserDataService
     public async Task<Dictionary<string,List<ExerciseOne>>> GetUserExercisesPlan(int UserId)
     {
         Dictionary<string, List<ExerciseOne>> exercisesMessage = new Dictionary<string, List<ExerciseOne>>();
+        string dateFormat = "yyyy-MM-dd";
+        DateTime dateTime = DateTime.Now; // Przykładowa data i czas
+        string formattedDate = dateTime.ToString(dateFormat);
 
         using (FitAppContext context = new FitAppContext(_configuration))
         {
+            //var userPlan = context.UserExercisesPlan.Where(e => e.UserId == UserId && e.Data.Equals(formattedDate)).ToList();
             var userPlan = context.UserExercisesPlan.Where(e => e.UserId == UserId).ToList();
             List<ExerciseOne> exerciseList = new List<ExerciseOne>();
             foreach(var exercise in userPlan)
@@ -267,6 +271,7 @@ public class UserDataService
                     ExerciseName = exercises.ExerciseName,
                     Repeat = exercise.RepetitionsNumber
                 };
+                exerciseList.Add(exerciseOne);
             }
 
             exercisesMessage.Add("message", exerciseList);

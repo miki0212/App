@@ -7,6 +7,10 @@ import UserProfileComponent from '../userProfile/UserProfileComponent';
 import Header from '../header/Header';
 import Navigation from '../navigation/Navigation';
 import ExercisesComponent from '../exercises/ExercisesComponent';
+import AdminPanelLoginComponent from '../../adminPanel/AdminPanelLoginComponent';
+import NavigationAdmin from '../../adminPanel/navigationAdmin/NavigationAdmin';
+import MainAdminPage from '../../adminPanel/mainAdminPage/MainAdminPage';
+import AddExerciseAdmin from '../../adminPanel/addExercise/AddExerciseAdmin';
 
 export default function MainWindow() {
 	return (
@@ -14,7 +18,18 @@ export default function MainWindow() {
             <div>
                 <Header />
                 <Navigation />
+
+                {/*Admin*/}
+                <NavigationAdmin />
+
                 <Routes>
+                    {/*Admin Panel*/}
+                    <Route path="/admin/login" element={<AdminPanelLoginComponent />}></Route>
+                    <Route path="/admin/adminMainPage" element={<MainAdminPage />}></Route>
+                    <Route path="/admin/addExercise" element={<AddExerciseAdmin />}></Route>
+
+
+                    {/*User*/}
                     <Route path="/" element={<LoginComponent />} />     
                     <Route path="/register" element={<RegisterComponent />} />
 

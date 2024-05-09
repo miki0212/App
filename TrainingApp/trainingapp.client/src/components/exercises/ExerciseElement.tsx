@@ -6,6 +6,8 @@ import { jwtDecode } from "jwt-decode";
 import IExercisesFavourites from "../../Interfaces/IExercisesFavourites";
 import { ENDPOINT, LINK } from "../../ENDPOINTS";
 import { json } from "react-router-dom";
+import DecodedTokenProperties from "../../helper/DecodedToken";
+import { IDecodedToken } from "../../Interfaces/IDecodedToken";
 
 export default function ExerciseElementComponent(props: { exercise: IExercise }) {
     const [isExerciseFavourite, setIsExerciseFavourite] = useState(false);
@@ -15,35 +17,32 @@ export default function ExerciseElementComponent(props: { exercise: IExercise })
 
     useEffect(() => {
         checkExercisesFavourites();
-    },[])
+    }, [props.exercise])
 
     useEffect(() => {
-        const token = localStorage.getItem('userToken');
-        if (token != null) {
-            const decodedToken = jwtDecode(token);
+        const decodedToken = DecodedTokenProperties();
+
+        if (decodedToken != null) {
             const exercisesFavourites: IExercisesFavourites = {
                 UserId: decodedToken.id,
                 ExerciseId: props.exercise.id,
             }
             setDtoExercisesFavourites(exercisesFavourites);
         }
-    },[])
+    }, [props.exercise])
 
     const checkExercisesFavourites = async () => {
-        //Get id from token
-        const token = localStorage.getItem('userToken');
 
-        if (token != null) {
+        const decodedToken: IDecodedToken = DecodedTokenProperties();
+
+        if (decodedToken != null) {
+
+            const exercisesFavourites: IExercisesFavourites = {
+                UserId: decodedToken.id,
+                ExerciseId: props.exercise.id,
+            }
+
             try {
-                const decodedToken = jwtDecode(token);
-                //console.log(decodedToken.id);
-                const exercisesFavourites: IExercisesFavourites = {
-                    UserId: decodedToken.id,
-                    ExerciseId: props.exercise.id,
-                }
-
-                //console.log(exercisesFavourites);
-
                 const url = `${LINK}${ENDPOINT.USERDATA.CHECKFAVOURITEEXERCISES}`;
 
                 await fetch(url, {
@@ -55,18 +54,18 @@ export default function ExerciseElementComponent(props: { exercise: IExercise })
                     body: JSON.stringify(exercisesFavourites)
                 }).then(response => {
                     if (response.status === 200) {
-                        //console.log(response.json())
                         return response.json();
                     } else {
-                        throw new Error("Check exerice Favourites ERROR");
+                        console.error("[ExerciseElement][checkExercisesFavourites] [ERROR]")
+                        throw new Error("[ExerciseElement][checkExercisesFavourites] [ERROR]");
                     }
                 }).then(data => {
-                        
+
                     setIsExerciseFavourite(data);
                 })
 
             } catch (e) {
-                console.log('ERROR')
+                console.error("[ExerciseElement][checkExercisesFavourites] [ERROR]")
             }
         }
     }
@@ -74,10 +73,8 @@ export default function ExerciseElementComponent(props: { exercise: IExercise })
     const addExerciseFavourite = () => {
         if (isExerciseFavourite) {
             addFavourite();
-            //setIsExerciseFavourite(!data);
         } else {
             addFavourite();
-            //setIsExerciseFavourite(!data);
         }
     }
 
@@ -94,18 +91,13 @@ export default function ExerciseElementComponent(props: { exercise: IExercise })
             if (response.status === 200) {
                 return response.json();
             } else {
-                console.error('add remove exercises favourite ERROR');
-                throw new Error('add remove exercises favourite ERROR');
+                console.error("[ExerciseElement][addFavourite] [ERROR]")
             }
         }).then(data => {
             return data;
-            setIsExerciseFavourite(!data);
-            console.log("is Favourite : " + data)
-            console.log("is Favourite : " + isExerciseFavourite)
         })
         setIsExerciseFavourite(!isExerciseFavourite);
         return data;
-        console.log("is Favourite : " + data)
     }
 
     return (
@@ -114,7 +106,7 @@ export default function ExerciseElementComponent(props: { exercise: IExercise })
             <div className={`exercise-element`}>{props.exercise.difficult}</div>
             <div className={`exercise-element`}>{props.exercise.category}</div>
             <div className={`exercise-element`}>{props.exercise.equipment ? 'Wymagane' : "Nie wymagane"}</div>
-            <div className={`exercise-element`}><button onClick={()=>addExerciseFavourite()} className={`exercise-like-btn`}>{isExerciseFavourite ? "-" : "+"}</button></div>
+            <div className={`exercise-element`}><button onClick={() => addExerciseFavourite()} className={`exercise-like-btn`}>{isExerciseFavourite ? "-" : "+"}</button></div>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 
 
 export interface IDecodedToken {
-    id : number,
-    username : string
+    id : string,
+    login : string,
+    accountType : string
 }
