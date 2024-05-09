@@ -7,14 +7,16 @@ import { IUserProfileData } from "../../../Interfaces/UserProfileData";
 export default function UserCaloricGoal() {
 
     const [userProfileData, setUserProfilData] = useState<IUserProfileData>();
-    const [userId, setUserId] = useState('2');
+    const [userId, setUserId] = useState('');
     const [userCaloricGoal, setUserCaloricGoal] = useState(0);
     useEffect(() => {
         getToken();
     })
     useEffect(() => {
 
-        fetchData();
+        if (userId !== '') {
+            fetchData();
+        }
     }, [userId]) 
     useEffect(() => {
 

@@ -7,14 +7,16 @@ import { jwtDecode } from "jwt-decode";
 export default function ShowExercisePlanHistory() {
 
     const [userExercisePlan, setUserExercisePlan] = useState<IUserExerciseList[]>();
-    const [userId, setUserId] = useState('2');
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
         getToken();
     })
     useEffect(() => {
        
-        fetchData();
+        if (userId !== '') {
+            fetchData();
+        }
     }, [userId]) 
 
     const getToken = async () => {
