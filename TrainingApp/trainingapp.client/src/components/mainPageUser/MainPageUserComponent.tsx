@@ -68,6 +68,8 @@ import { ENDPOINT, LINK } from '../../ENDPOINTS';
 import UserExercisesComponent from './UserExercises';
 import UserAddExerciseComponent from './UserAddExercisesComponent';
 import UserCaloricGoal from './CaloricGoal/UserCaloricGoal';
+import UserMealHistory from '../meal/user/userMealHistory/UserMealHistory';
+import UserAddMealComponent from '../meal/user/addNewMeal/UserAddMealComponent';
 
 
 
@@ -87,6 +89,8 @@ export default function MainPageUserController() {
 
     //Exercises component
     const [isActiveAddExercise, setIsActiveAddExercise] = useState(false);
+
+    const [isActiveAddMeal, setIsActiveAddMeal] = useState(false);
 
     useEffect(() => {
         //Check exists token
@@ -157,8 +161,8 @@ export default function MainPageUserController() {
                                 <UserCaloricGoal />
                             </div>
                             <div className="component food-list-component" id="food-list-component">
-                                Lista posilkow
-                                <button>Dodaj Posilek</button>
+                                {/*{isActiveAddMeal ? <UserAddMealComponent isActiveAddExercise={isActiveAddExercise} setIsActiveAddExercise={setIsActiveAddExercise}></UserAddMealComponent> : <UserMealHistory isActiveAddMeal={isActiveAddMeal} setIsActiveAddMeal={setIsActiveAddMeal} />}*/}
+                                {isActiveAddMeal ? <UserAddMealComponent isActiveAddMeal={isActiveAddMeal} setIsActiveAddMeal={setIsActiveAddMeal}></UserAddMealComponent> : <UserMealHistory isActiveAddMeal={isActiveAddMeal} setIsActiveAddMeal={setIsActiveAddMeal} />}
                             </div>
                         </div>
                     </div >

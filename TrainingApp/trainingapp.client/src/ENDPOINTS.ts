@@ -22,6 +22,15 @@ export const ENDPOINT = {
 		ADDUSEREXERCISESPLAN: "/UserData/AddUserExercisesPlan",
 		GETUSEREXERCISESPLAN: "/UserData/getUserExercisesPlan?UserId={UserId}"
 	},
+	MEALS: {
+		GET_MEAL_MAX_PAGE: "/Meal/getMealMaxSize",
+		GET_MEAL_PAGE: "/Meal/getMealPage?page={page}",
+		GET_USER_MEAL_HISTORY: "/Meal/getUserMealHistory?UserId={UserId}",
+		GET_MEAL_BY_NAME: "/Meal/getMealByName?searchString={searchString}",
+		Add_User_Meal_History: "/Meal/addUserMealHistory",
+
+		CalculateCalories: "/Meal/calculateCalories?UserId={UserId}"
+	},
 	ADMIN: {
 		LOGINADMIN: "/Admin/loginAdmin",
 

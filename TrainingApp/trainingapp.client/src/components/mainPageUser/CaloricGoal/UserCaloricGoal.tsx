@@ -9,6 +9,9 @@ export default function UserCaloricGoal() {
     const [userProfileData, setUserProfilData] = useState<IUserProfileData>();
     const [userId, setUserId] = useState('');
     const [userCaloricGoal, setUserCaloricGoal] = useState(0);
+
+    const [userCalories, setUserCalories] = useState<number>(0);
+
     useEffect(() => {
         getToken();
     })
@@ -22,6 +25,34 @@ export default function UserCaloricGoal() {
 
         calculateCaloricGoal();
     }, [userProfileData]) 
+
+    useEffect(() => {
+        if (userId != '') {
+            getCalories();
+        }
+     
+    }, [userId]);
+
+    const getCalories = async () => {
+
+        const url = `${LINK}${ENDPOINT.MEALS.CalculateCalories.replace("{UserId}", userId)}`;
+
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "*"
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error("GETUSERPROFILEDATA");
+            }
+        }).then(data => {
+            setUserCalories(data as number);
+        })
+    }
 
 
 
@@ -79,7 +110,7 @@ export default function UserCaloricGoal() {
 
     return (
         <div className="user-caloric-goal-container">
-            0 / {userCaloricGoal}
+            {userCalories} / {userCaloricGoal}
         </div>
     );
 }

@@ -13,6 +13,7 @@ export default function UserAddExerciseComponent(props: { isActiveAddExercise: b
     const [choosenExercise, setChoosenExercise] = useState<IExercise>();
     const [exercisesList, setExercisesList] = useState<IExercise[]>();
     const [repetitions, setRepetitions] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const [repeatExercise, setRepeatExercise] = useState(0);
     const [userId, setUserId] = useState(0);
@@ -35,6 +36,7 @@ export default function UserAddExerciseComponent(props: { isActiveAddExercise: b
     })
 
     const searchExercisesByName = async (e: Event) => {
+        setErrorMessage("");
         setChoosenExercise(null);
         setExercisesList(null);
         const inputValue = (e.target as HTMLInputElement).value;
@@ -65,6 +67,9 @@ export default function UserAddExerciseComponent(props: { isActiveAddExercise: b
     };
 
     const addExerciseToPlan = async () => {
+        if (repeatExercise === 0) {
+            setErrorMessage("Podaj poprawna liczbe powtorzen !!!");
+        }
         if (choosenExercise != null && userId != 0 && repeatExercise != 0) {
 
             const newExercise: INewExerciseInPlan = {
@@ -125,6 +130,9 @@ export default function UserAddExerciseComponent(props: { isActiveAddExercise: b
             <div>
                 <button onClick={() => { addExerciseToPlan() }}>Dodaj</button>
                     <button onClick={() => { props.setIsActiveAddExercise(!props.isActiveAddExercise) }}>Anuluj</button>
+                </div>
+                <div className={`status-message-div`}>
+                    {errorMessage}
                 </div>
                 <div className={`status-message-div`}>
                     {statusMessage}

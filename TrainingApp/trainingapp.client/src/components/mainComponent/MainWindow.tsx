@@ -11,34 +11,38 @@ import AdminPanelLoginComponent from '../../adminPanel/AdminPanelLoginComponent'
 import NavigationAdmin from '../../adminPanel/navigationAdmin/NavigationAdmin';
 import MainAdminPage from '../../adminPanel/mainAdminPage/MainAdminPage';
 import AddExerciseAdmin from '../../adminPanel/addExercise/AddExerciseAdmin';
+import MealContainerComponent from '../meal/mealContainer/MealContainerComponent';
 
 export default function MainWindow() {
 	return (
-        <Router>
-            <div>
-                <Header />
-                <Navigation />
+		<Router>
+			<div>
+				<Header />
+				<Navigation />
 
-                {/*Admin*/}
-                <NavigationAdmin />
+				{/*Admin*/}
+				<NavigationAdmin />
 
-                <Routes>
-                    {/*Admin Panel*/}
-                    <Route path="/admin/login" element={<AdminPanelLoginComponent />}></Route>
-                    <Route path="/admin/adminMainPage" element={<MainAdminPage />}></Route>
-                    <Route path="/admin/addExercise" element={<AddExerciseAdmin />}></Route>
+				<Routes>
+					{/*Admin Panel*/}
+					<Route path="/admin/login" element={<AdminPanelLoginComponent />}></Route>
+					<Route path="/admin/adminMainPage" element={<MainAdminPage />}></Route>
+					<Route path="/admin/addExercise" element={<AddExerciseAdmin />}></Route>
 
 
-                    {/*User*/}
-                    <Route path="/" element={<LoginComponent />} />     
-                    <Route path="/register" element={<RegisterComponent />} />
+					{/*User*/}
+					<Route path="/" element={<LoginComponent />} />
+					<Route path="/register" element={<RegisterComponent />} />
 
-                    <Route path="/user/UserMainPage" element={<MainPageUserController />} />
-                    <Route path="/user/UserProfile" element={<UserProfileComponent />} />
-                    <Route path="/user/Exercises" element={<ExercisesComponent />} />
+					<Route path="/user/UserMainPage" element={<MainPageUserController />} />
+					<Route path="/user/UserProfile" element={<UserProfileComponent />} />
+					<Route path="/user/Exercises" element={<ExercisesComponent />} />
 
-                </Routes>
-            </div>
-        </Router>
+					{/*Meals*/}
+					<Route path="/user/Meal" element={<MealContainerComponent />} />
+			
+				</Routes>
+			</div>
+		</Router>
 	)
 }

@@ -1,0 +1,28 @@
+.meal-table-row {
+	display: flex;
+	justify-content: space-around;
+	padding: 10px 0;
+	cursor: pointer;
+	border: 2px solid white;
+	border-radius: 10px;
+	margin: 0px 5px;
+
+	.meal-name-column {
+		min-width: 250px;
+		max-width: 250px;
+	}
+
+	div {
+		overflow: hidden; /* Ukrywa tekst, który nie mieœci siê w kontenerze */
+		min-width: 70px;
+		max-width: 70px;
+		max-height: 20px;
+		margin: 0px;
+		padding: 0px;
+		display: flex;
+		justify-content: center;
+	}
+}
+.meal-table-row:hover {
+	background: rgb(75, 65, 100);
+}

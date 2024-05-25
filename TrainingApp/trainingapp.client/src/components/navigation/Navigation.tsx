@@ -52,7 +52,7 @@ export default function Navigation() {
                 <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/user/UserMainPage" >Strona Glowna</NavLink></li>
                 <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/user/UserProfile" >Profil</NavLink></li>
 
-                <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/user/Food" >Posilki</NavLink></li>
+                <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/user/Meal" >Posilki</NavLink></li>
                 <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/user/Exercises" >Cwiczenia</NavLink></li>
 
             </ul>

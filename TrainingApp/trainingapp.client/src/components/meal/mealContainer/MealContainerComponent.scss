@@ -1,0 +1,31 @@
+
+
+.meal-container {
+    width: 960px;
+    min-height: 500px;
+    background: rgb(65, 65, 90);
+    position: relative;
+
+    h2{
+        padding-top:15px;
+        text-align:center;
+    }
+
+    .meal-container-btn {
+        width: 100%;
+        display: flex;
+        background: rgb(65, 65, 90);
+        justify-content: space-around;
+        position: absolute;
+        overflow: hidden;
+        bottom: 10px;
+        left: 0;
+        align-items:center;
+
+
+        button {
+            padding: 10px;
+            min-width:250px;
+        }
+    }
+}

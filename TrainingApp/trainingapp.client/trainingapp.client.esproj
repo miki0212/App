@@ -13,8 +13,13 @@
     <Folder Include="src\adminPanel\mainAdminPage\" />
     <Folder Include="src\adminPanel\adminDataProvider\" />
     <Folder Include="src\components\exercises\" />
+    <Folder Include="src\components\meal\mealContainer\" />
+    <Folder Include="src\components\meal\mealListItem\" />
+    <Folder Include="src\components\meal\user\addNewMeal\" />
+    <Folder Include="src\components\meal\user\userMealListElementComponent\" />
     <Folder Include="src\Interfaces\Exercise\" />
     <Folder Include="src\Interfaces\Meal\" />
+    <Folder Include="src\Interfaces\Meals\" />
     <Folder Include="src\Interfaces\User\" />
     <Folder Include="src\Interfaces\Nowy folder\" />
     <Folder Include="src\helper\" />
