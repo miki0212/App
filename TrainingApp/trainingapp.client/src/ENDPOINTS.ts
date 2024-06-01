@@ -20,8 +20,13 @@ export const ENDPOINT = {
 
 		//Add Exercises to list 
 		ADDUSEREXERCISESPLAN: "/UserData/AddUserExercisesPlan",
-		GETUSEREXERCISESPLAN: "/UserData/getUserExercisesPlan?UserId={UserId}"
+		GETUSEREXERCISESPLAN: "/UserData/getUserExercisesPlan?UserId={UserId}",
+		CALCULATE_EXERCISE_CALORIES: "/UserData/calculateExerciseCalories?UserId={UserId}",
+
+		//Ranking
+		GET_EXERCISES_USER_RANKING:"/UserData/GetExercisesUserRanking?userId={userId}"
 	},
+
 	MEALS: {
 		GET_MEAL_MAX_PAGE: "/Meal/getMealMaxSize",
 		GET_MEAL_PAGE: "/Meal/getMealPage?page={page}",
@@ -31,10 +36,16 @@ export const ENDPOINT = {
 
 		CalculateCalories: "/Meal/calculateCalories?UserId={UserId}"
 	},
+
 	ADMIN: {
 		LOGINADMIN: "/Admin/loginAdmin",
 
 		GETADMINPRIVILEGES: '/Admin/getAdminPrivileges?adminId={adminId}',
-		ADD_ADMIN_EXERCISES: '/Admin/addAdminExercise'
+		ADD_ADMIN_EXERCISES: '/Admin/addAdminExercise',
+
+		GET_MAX_USER_PAGE :'/Admin/GetMaxUserPage',
+		GET_ADMIN_USER_LIST: '/Admin/getAdminUserList?pageNumber={pageNumber}',
+
+		BLOCK_USER: "/Admin/blockUser?userId={userId}"
 	}
 }

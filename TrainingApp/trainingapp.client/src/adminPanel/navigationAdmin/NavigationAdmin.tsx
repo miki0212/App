@@ -49,11 +49,9 @@ export default function NavigationAdmin() {
                         <ul>
                             <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/admin/adminMainPage" >Strona Glowna</NavLink></li>
                             <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/admin/AddNewAdmin" >Dodaj Admina</NavLink></li>
-                            <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/admin/AddNewAdmin" >Zablokuj uzytkownika</NavLink></li>
+                            <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/admin/ManageUser" >Zablokuj uzytkownika</NavLink></li>
                             <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/admin/addExercise" >Dodaj Cwiczenie</NavLink></li>
                             <li><NavLink className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "menu-button menu-button-choosen" : "menu-button"} to="/admin/AddNewAdmin" >Dodaj Posilek</NavLink></li>
-
-
                         </ul>
                     </nav>
                     : <></>}

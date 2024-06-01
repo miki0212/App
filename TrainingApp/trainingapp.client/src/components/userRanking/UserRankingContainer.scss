@@ -1,0 +1,83 @@
+.ranking-container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .ranking-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        background: rgb(65, 65, 90);
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            gap: 5px;
+            padding: 10px;
+            background: rgb(65, 65, 90);
+            min-height: 400px;
+
+            .main-row {
+                padding: 10px;
+                width: 80%;
+                border: 4px solid white;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+
+                div {
+                    min-width: 120px;
+                    text-align: center;
+                }
+            }
+
+            .row-my-place {
+                justify-content: space-around;
+                padding: 10px;
+                width: 80%;
+                border: 5px solid wheat;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: row;
+            }
+
+            .row {
+                justify-content: space-around;
+                padding: 10px;
+                width: 80%;
+                border: 1px solid white;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: row;
+
+                div {
+                    min-width: 120px;
+                    text-align: center;
+                }
+            }
+
+            .row-gold {
+                border: 3px solid gold;
+            }
+
+            .row-silver {
+                border: 3px solid silver;
+            }
+
+            .row-brown {
+                border: 3px solid brown;
+            }
+
+            .user-rank {
+                font-size: 22px;
+                font-weight: 700;
+            }
+        }
+    }
+}

@@ -77,6 +77,9 @@ export default function MainPageUserController() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [decodedToken, setDecodedToken] = useState<IDecodedToken>();
     const [login, setLogin] = useState('');
+    const [userCalories, setUserCalories] = useState<number>(0);
+
+    const [userExercisesCalories, setUserExercisesCalories] = useState<number>(0);
 
     const [userProfileData, setUserProfileData] = useState<IUserProfileData>({
         UserId: 0,
@@ -91,6 +94,8 @@ export default function MainPageUserController() {
     const [isActiveAddExercise, setIsActiveAddExercise] = useState(false);
 
     const [isActiveAddMeal, setIsActiveAddMeal] = useState(false);
+
+    const [userId, setUserId] = useState(0);
 
     useEffect(() => {
         //Check exists token
@@ -114,7 +119,41 @@ export default function MainPageUserController() {
         }
     },[])
 
+    useEffect(() => {
+        const token = localStorage.getItem('userToken');
 
+        if (token != null) {
+            try {
+                const decodedToken = jwtDecode(token);
+                //console.log(decodedToken)
+
+                setUserId(decodedToken.id as number);
+            } catch (error) {
+                console.error('B³¹d dekodowania tokena:', error);
+            }
+        }
+    })
+
+    useEffect(() => {
+        if (userId != 0) {
+            getCalories();
+            getExercisesCalories();
+            //getTestRanking();
+        }
+    }, [userId])
+
+
+    const getTestRanking = () => {
+        const url = `${LINK}${ENDPOINT.USERDATA.GET_EXERCISES_USER_RANKING.replace("{userId}", userId.toString())}`
+
+        fetch(url, {
+            method: "GET"
+        }).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+        })
+    }
     async function checkAndGetUserProfileData(userID : string) {
         const url = `${LINK}${ENDPOINT.USERDATA.GETPROFILEDATA.replace("{userId}", userID)}`;
 
@@ -138,6 +177,50 @@ export default function MainPageUserController() {
         })
     }
 
+    const getCalories = async () => {
+     
+        const url = `${LINK}${ENDPOINT.MEALS.CalculateCalories.replace("{UserId}", userId.toString())}`;
+        
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "*"
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error("GETUSERPROFILEDATA");
+            }
+        }).then(data => {
+            //console.log("CALORIES : "+data)
+            setUserCalories(data as number);
+        })
+    }
+
+    const getExercisesCalories = async () => {
+        const url = `${LINK}${ENDPOINT.USERDATA.CALCULATE_EXERCISE_CALORIES.replace("{UserId}", userId.toString())}`;
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "*"
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error("GETUSERPROFILEDATA");
+            }
+        }).then(data => {
+            console.log(data);
+            setUserExercisesCalories(data as number)
+        })
+    }
+
+
+ 
     return (
         <>
             {
@@ -147,7 +230,7 @@ export default function MainPageUserController() {
                             <div className="component-exercise" id="component-1">
                                 {userProfileDataExists ?
                                     <>
-                                        {isActiveAddExercise ? <UserAddExerciseComponent isActiveAddExercise={isActiveAddExercise} setIsActiveAddExercise={setIsActiveAddExercise}></UserAddExerciseComponent> : <UserExercisesComponent isActiveAddExercise={isActiveAddExercise} setIsActiveAddExercise={setIsActiveAddExercise} />}
+                                        {isActiveAddExercise ? <UserAddExerciseComponent getExercisesCalories={getExercisesCalories} isActiveAddExercise={isActiveAddExercise} setIsActiveAddExercise={setIsActiveAddExercise}></UserAddExerciseComponent> : <UserExercisesComponent isActiveAddExercise={isActiveAddExercise} setIsActiveAddExercise={setIsActiveAddExercise} />}
                                        
                                     </>
                                     :
@@ -157,12 +240,11 @@ export default function MainPageUserController() {
 
                             </div>
                             <div className="calories-goal-component" id="component-2">
-                                <h3>Zapotrzebowanie kaloryczne</h3>
-                                <UserCaloricGoal />
+                                {/*<h3>Zapotrzebowanie kaloryczne</h3>*/}
+                                <UserCaloricGoal getCalories={getCalories} userCalories={userCalories} userExercisesCalories={userExercisesCalories} getExercisesCalories={getExercisesCalories} />
                             </div>
                             <div className="component food-list-component" id="food-list-component">
-                                {/*{isActiveAddMeal ? <UserAddMealComponent isActiveAddExercise={isActiveAddExercise} setIsActiveAddExercise={setIsActiveAddExercise}></UserAddMealComponent> : <UserMealHistory isActiveAddMeal={isActiveAddMeal} setIsActiveAddMeal={setIsActiveAddMeal} />}*/}
-                                {isActiveAddMeal ? <UserAddMealComponent isActiveAddMeal={isActiveAddMeal} setIsActiveAddMeal={setIsActiveAddMeal}></UserAddMealComponent> : <UserMealHistory isActiveAddMeal={isActiveAddMeal} setIsActiveAddMeal={setIsActiveAddMeal} />}
+                                {isActiveAddMeal ? <UserAddMealComponent isActiveAddMeal={isActiveAddMeal} setIsActiveAddMeal={setIsActiveAddMeal} getUserCalories={getCalories} userCalories={userCalories}></UserAddMealComponent> : <UserMealHistory isActiveAddMeal={isActiveAddMeal} setIsActiveAddMeal={setIsActiveAddMeal} />}
                             </div>
                         </div>
                     </div >

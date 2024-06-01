@@ -90,7 +90,7 @@ public class MealService
         }
     }
 
-    public async Task<Dictionary<string, List<UserMealHistoryDto>>> GetUserMealHistory()
+    public async Task<Dictionary<string, List<UserMealHistoryDto>>> GetUserMealHistory(int userId)
     {
         Dictionary<string, List<UserMealHistoryDto>> responseMessage = new Dictionary<string, List<UserMealHistoryDto>>();
 
@@ -104,7 +104,7 @@ public class MealService
         {
             try
             {
-                meals = context.UserMealHistory.Where(e => e.Date == currentDate).ToList();
+                meals = context.UserMealHistory.Where(e => e.Date == currentDate && e.UserId == userId).ToList();
 
                 foreach (var meal in meals) {
                     string mealName = context.Meals.First(e => e.Id == meal.MealId).MealName;
@@ -140,7 +140,7 @@ public class MealService
 
         using (FitAppContext context = new FitAppContext(_configuration))
         {
-            mealList = context.Meals.Where(e => e.MealName.StartsWith(searchString)).OrderBy(e => e.MealName).Take(10).ToList();
+            mealList = context.Meals.Where(e => e.MealName.StartsWith(searchString)).OrderBy(e => e.MealName).Take(3).ToList();
             message.Add("message", mealList);
 
             return message;

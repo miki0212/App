@@ -29,6 +29,7 @@ export default function ShowMealHistory() {
         if (token != null) {
             try {
                 const decodedToken = jwtDecode(token);
+          /*      console.log("USER ID : " + decodedToken.id)*/
                 setUserId(decodedToken.id as string);
             } catch (error) {
                 console.error('B³¹d dekodowania tokena:', error);
@@ -39,7 +40,7 @@ export default function ShowMealHistory() {
         let url;
 
         if (userId === '') {
-            url = `${LINK}${ENDPOINT.MEALS.GET_USER_MEAL_HISTORY.replace('{UserId}', '2')}`;
+            url = `${LINK}${ENDPOINT.MEALS.GET_USER_MEAL_HISTORY.replace('{UserId}', userId)}`;
             setUserId('1')
         } else {
             url = `${LINK}${ENDPOINT.MEALS.GET_USER_MEAL_HISTORY.replace('{UserId}', userId)}`;

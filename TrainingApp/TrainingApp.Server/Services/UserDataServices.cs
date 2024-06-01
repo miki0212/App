@@ -95,7 +95,7 @@ public class UserDataService
                 }
 
                 UserData existsUserData = context.UsersData.FirstOrDefault(t => t.UserId == UserId);
-                
+
 
                 if (existsUserData != null)
                 {
@@ -112,30 +112,35 @@ public class UserDataService
                     messages.Add("UserData", userDataDto);
                     return messages;
                 }
-                else {
+                else
+                {
                     messages.Add("UserData", null);
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw new Exception();
             }
         }
         return messages;
     }
 
-    public async Task<Dictionary<string, List<Exercises>>> GetExercisesPage(int pageNumber){
+    public async Task<Dictionary<string, List<Exercises>>> GetExercisesPage(int pageNumber)
+    {
         Dictionary<string, List<Exercises>> exercisesMessage = new Dictionary<string, List<Exercises>>();
         int pageSize = 6;
         List<Exercises> exercisesList = null;
-        if (pageNumber > await GetMaxExercisesPage(pageSize)) {
+        if (pageNumber > await GetMaxExercisesPage(pageSize))
+        {
             exercisesMessage.Add("messagge", exercisesList);
             return exercisesMessage;
         }
 
-        using (FitAppContext context = new FitAppContext(_configuration)) {
-            exercisesList =  context.Exercises.OrderBy(e => e.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+        using (FitAppContext context = new FitAppContext(_configuration))
+        {
+            exercisesList = context.Exercises.OrderBy(e => e.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             int totalExercisesRecords = context.Exercises.Count();
-            int totalExercisesPage= (int)Math.Ceiling((double)totalExercisesRecords / pageSize);
+            int totalExercisesPage = (int)Math.Ceiling((double)totalExercisesRecords / pageSize);
             exercisesMessage.Add("message", exercisesList);
             return exercisesMessage;
         }
@@ -154,7 +159,8 @@ public class UserDataService
         }
     }
 
-    public async Task<int> GetMaxExercisesPage(int pageSize) {
+    public async Task<int> GetMaxExercisesPage(int pageSize)
+    {
         using (FitAppContext context = new FitAppContext(_configuration))
         {
             int totalExercisesRecords = context.Exercises.Count();
@@ -166,9 +172,9 @@ public class UserDataService
 
     public async Task<Dictionary<string, bool>> AddRemoveFavouriteExercise(DtoExercisesFavourites exerciseFavourites)
     {
-        Dictionary<string,bool> exercisesMessage = new Dictionary<string, bool>();
+        Dictionary<string, bool> exercisesMessage = new Dictionary<string, bool>();
         List<Exercises> exercisesList = null;
-   
+
 
         using (FitAppContext context = new FitAppContext(_configuration))
         {
@@ -179,7 +185,8 @@ public class UserDataService
                 context.ExerciseFavorites.Remove(exerciseExistsInFavourites);
                 exercisesMessage.Add("message", false);
             }
-            else {
+            else
+            {
                 ExerciseFavorites exerciseFavorites = new ExerciseFavorites()
                 {
                     UserId = exerciseFavourites.UserId,
@@ -202,12 +209,12 @@ public class UserDataService
         using (FitAppContext context = new FitAppContext(_configuration))
         {
             var existsFavouriteExercises = context.ExerciseFavorites.FirstOrDefault(e => e.UserId == exerciseFavourites.UserId && e.ExerciseId == exerciseFavourites.ExerciseId);
-            
+
             if (existsFavouriteExercises != null)
             {
                 exercisesMessage.Add("message", true);
             }
-            else 
+            else
             {
                 exercisesMessage.Add("message", false);
             }
@@ -215,7 +222,7 @@ public class UserDataService
         }
     }
 
-    public async Task<Dictionary<string, bool>> GetUserExercisesPlan(int UserId,string date)
+    public async Task<Dictionary<string, bool>> GetUserExercisesPlan(int UserId, string date)
     {
         string dateFormat = "yyyy-MM-dd";
         DateTime dateTime = DateTime.Now; // Przykładowa data i czas
@@ -234,16 +241,18 @@ public class UserDataService
         string formattedDate = dateTime.ToString(dateFormat);
         Dictionary<string, bool> exercisesMessage = new Dictionary<string, bool>();
 
+        string currentDate = DateTime.Now.ToString("dd-MM-yyyy");
+
         using (FitAppContext context = new FitAppContext(_configuration))
         {
             UserExercisesPlan userExercisesPlan = new UserExercisesPlan()
             {
-                Data = formattedDate,
+                Data = currentDate,
                 ExerciseId = newExercises.ExerciseId,
                 UserId = newExercises.UserId,
                 RepetitionsNumber = newExercises.Repeat
             };
-            context.UserExercisesPlan.Add(userExercisesPlan);   
+            context.UserExercisesPlan.Add(userExercisesPlan);
             context.SaveChanges();
 
             exercisesMessage.Add("message", true);
@@ -251,21 +260,23 @@ public class UserDataService
         }
     }
 
-    public async Task<Dictionary<string,List<ExerciseOne>>> GetUserExercisesPlan(int UserId)
+    public async Task<Dictionary<string, List<ExerciseOne>>> GetUserExercisesPlan(int UserId)
     {
         Dictionary<string, List<ExerciseOne>> exercisesMessage = new Dictionary<string, List<ExerciseOne>>();
         string dateFormat = "yyyy-MM-dd";
         DateTime dateTime = DateTime.Now; // Przykładowa data i czas
         string formattedDate = dateTime.ToString(dateFormat);
 
+        string currentDate = DateTime.Now.ToString("dd-MM-yyyy");
+
         using (FitAppContext context = new FitAppContext(_configuration))
         {
             //var userPlan = context.UserExercisesPlan.Where(e => e.UserId == UserId && e.Data.Equals(formattedDate)).ToList();
-            var userPlan = context.UserExercisesPlan.Where(e => e.UserId == UserId).ToList();
+            var userPlan = context.UserExercisesPlan.Where(e => e.UserId == UserId && e.Data == currentDate).ToList();
             List<ExerciseOne> exerciseList = new List<ExerciseOne>();
-            foreach(var exercise in userPlan)
+            foreach (var exercise in userPlan)
             {
-                var exercises = context.Exercises.FirstOrDefault(e=>e.Id==exercise.ExerciseId);
+                var exercises = context.Exercises.FirstOrDefault(e => e.Id == exercise.ExerciseId);
                 ExerciseOne exerciseOne = new ExerciseOne()
                 {
                     ExerciseName = exercises.ExerciseName,
@@ -279,4 +290,83 @@ public class UserDataService
             return exercisesMessage;
         }
     }
+    public async Task<Dictionary<string, double>> CalculateExerciseCalories(int userId)
+    {
+        string currentDate = DateTime.Now.ToString("dd-MM-yyyy");
+
+        //Today date
+        DateTime dateTime = DateTime.Now;
+
+        Dictionary<string, double> message = new Dictionary<string, double>();
+
+        using (FitAppContext context = new FitAppContext(_configuration))
+        {
+            List<UserExercisesPlan> exercisesList = context.UserExercisesPlan.Where(e => e.Data == currentDate && e.UserId == userId).ToList();
+
+            double caloriesSum = 0;
+
+            foreach (var exercise in exercisesList)
+            {
+                float calories = context.Exercises.First(e => e.Id == exercise.ExerciseId).Calories;
+
+                double mealCalories = (double)exercise.RepetitionsNumber * calories;
+
+                //double mealCalories = calories * weight;
+                caloriesSum += mealCalories;
+            }
+
+            message.Add("message", caloriesSum);
+            return message;
+        }
+    }
+
+    public async Task<Dictionary<string,DtoUserRankingList>> GetExercisesUserRanking(int userId, int showTop)
+    {
+        showTop = 6;
+        DtoUserRankingList list = new DtoUserRankingList();
+        list.UserRanking = new List<DtoUserRanking>();
+
+        Dictionary<string, DtoUserRankingList> message = new Dictionary<string, DtoUserRankingList>();
+
+        using (FitAppContext context = new FitAppContext(_configuration))
+        {
+
+            List<User> usersId = context.Users.ToList();
+
+            //List<DtoUserRanking> userRankings = new List<DtoUserRanking>();
+
+            int userRankingCounter = 1;
+            int myRanking = 1;
+
+            //Obliczanie kalorii dla kazdego uzytkownia
+            foreach (var user in usersId)
+            {
+                userRankingCounter++;
+
+                Dictionary<string, double> status = await CalculateExerciseCalories(user.Id);
+                status.TryGetValue("message", out double userCalories);
+
+                DtoUserRanking dtoUserRanking = new DtoUserRanking()
+                {
+                    Id = user.Id,
+                    Login = user.Login,
+                    Calories = userCalories,
+                    Position = 0
+                };
+
+                list.UserRanking.Add(dtoUserRanking);
+
+                //Posortowany ranking uzytkownikow
+                list.UserRanking = list.UserRanking.OrderByDescending(user => user.Calories).ThenBy(user => user.Login).ToList();
+            }
+            int myRank = list.UserRanking.FindIndex(e => e.Id == userId) + 1;
+            list.MyRank = myRank;
+
+            list.UserRanking = list.UserRanking.OrderByDescending(user => user.Calories).Take(showTop).ToList();
+
+            message.Add("message", list);
+            return message;
+        }
+    }
+
 }

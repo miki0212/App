@@ -2,13 +2,21 @@
 
 .meal-container {
     width: 960px;
-    min-height: 500px;
+    min-height: 70vh;
     background: rgb(65, 65, 90);
     position: relative;
 
-    h2{
-        padding-top:15px;
-        text-align:center;
+    h2 {
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .meal-search-input {
+        width: 99.5%;
+        padding: 10px 0px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        text-align: center;
     }
 
     .meal-container-btn {
@@ -20,12 +28,12 @@
         overflow: hidden;
         bottom: 10px;
         left: 0;
-        align-items:center;
+        align-items: center;
 
 
         button {
             padding: 10px;
-            min-width:250px;
+            min-width: 250px;
         }
     }
 }

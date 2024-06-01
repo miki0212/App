@@ -9,7 +9,7 @@ import INewExerciseInPlan from "../../Interfaces/INewExerciseInPlan";
 import { json } from "node:stream/consumers";
 
 
-export default function UserAddExerciseComponent(props: { isActiveAddExercise: boolean, setIsActiveAddExercise: any }) {
+export default function UserAddExerciseComponent(props: { isActiveAddExercise: boolean, setIsActiveAddExercise: any, getExercisesCalories : any }) {
     const [choosenExercise, setChoosenExercise] = useState<IExercise>();
     const [exercisesList, setExercisesList] = useState<IExercise[]>();
     const [repetitions, setRepetitions] = useState(0);
@@ -103,7 +103,7 @@ export default function UserAddExerciseComponent(props: { isActiveAddExercise: b
                         setStatusMessage("")
                     }, 1500)
                 }
-                console.log(data);
+                props.getExercisesCalories();
             })
         }
     }

@@ -51,6 +51,10 @@ namespace TrainingApp.Server.Controllers
 
             statusMap.TryGetValue("statusCode", out string code);
             statusMap.TryGetValue("message", out string message);
+            if(message == null)
+            {
+                message = "sda";
+            }
 
             if (int.Parse(code) == 0)
             {
@@ -59,6 +63,9 @@ namespace TrainingApp.Server.Controllers
             else if (int.Parse(code) == 1)
             {
                 return NotFound(message);
+            }
+            else if (int.Parse(code) == 3) {
+                return await Task.FromResult<IActionResult>(StatusCode(202, message));
             }
             else
             {

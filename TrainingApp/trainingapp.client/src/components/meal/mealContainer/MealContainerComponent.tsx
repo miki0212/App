@@ -14,6 +14,8 @@ export default function MealContainerComponent() {
 
 	const [isLoaded, setIsLoaded] = useState(false);
 
+	const [mealName, setMealName] = useState('');
+
 	useEffect(() => {
 		getMaxMealPage();
 
@@ -38,11 +40,20 @@ export default function MealContainerComponent() {
 		})
 	}
 
+	useEffect(() => {
+		if (mealName == '') {
+			setCurrentPage(1)
+			getMaxMealPage();
+		}
+	}, [mealName])
+
 
 	const getNextPage = async () => {
-		setCurrentPage(currentPage+1)
+		if (currentPage + 1 <= maxPage)
+			setCurrentPage(currentPage+1)
 	}
 	const getPrevPage = async () => {
+		if (currentPage-1 > 0)
 		setCurrentPage(currentPage - 1)
 	}
 
@@ -53,13 +64,16 @@ export default function MealContainerComponent() {
 			<div className={`meal-container`}>
 
 				<h2>Lista posilkow</h2>
-				<MealListContainerComponent page={currentPage} />
-				<div className={`meal-container-btn`}>
-					<button onClick={getPrevPage} > Poprzednia strona</button>
-					<div>{currentPage} / {maxPage}</div>
-					<button onClick={getNextPage}>Nastepna strona</button>
-				</div>
-
+				<input className={`meal-search-input`} type={`text`} placeholder={`Wyszukaj posilek`} onChange={(e) => setMealName((e.target as HTMLInputElement).value)}></input>
+				<MealListContainerComponent searchMealName={mealName} page={currentPage} />
+				{mealName == '' ?
+					<div className={`meal-container-btn`}>
+						<button onClick={getPrevPage} > Poprzednia strona</button>
+						<div>{currentPage} / {maxPage}</div>
+						<button onClick={getNextPage}>Nastepna strona</button>
+					</div>
+					:
+					<></>}
 			</div >
 		</>
 	)

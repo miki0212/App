@@ -6,7 +6,7 @@ import { ENDPOINT, LINK } from '../../../ENDPOINTS';
 import { DEFAULT_HEADERS } from '../../../helper/DefaultHeaders';
 import MealListItemComponent from '../mealListItem/MealListItemComponent';
 
-export default function MealListContainerComponent(props: { page: number }) {
+export default function MealListContainerComponent(props: { page: number, searchMealName: string }) {
 	const [mealList, setMealList] = useState<IMeal[]>([])
 
 	useEffect(() => {
@@ -16,6 +16,34 @@ export default function MealListContainerComponent(props: { page: number }) {
 	useEffect(() => {
 		fetchData();
 	}, [props.page])
+
+	useEffect(() => {
+		if (props.searchMealName != '') {
+			getMealMyName();
+		} else {
+			fetchData();
+		}
+	}, [props.searchMealName])
+
+	const getMealMyName = async () => {
+
+		const url = `${LINK}${ENDPOINT.MEALS.GET_MEAL_BY_NAME.replace("{searchString}", props.searchMealName)}`;
+		await fetch(url, {
+			method: "GET",
+			headers: DEFAULT_HEADERS
+		}).then(response => {
+			if (response.status === 200) {
+				return response.json();
+			} else {
+				console.error("[MEAL_LIST_CONTAINER_COMPONENT][FETCH_DATA][ERROR]");
+				throw new Error("[MEAL_LIST_CONTAINER_COMPONENT][FETCH_DATA][ERROR]");
+			}
+		}).then(data => {
+			console.log(data)
+			//setMealList([])
+			setMealList(data as IMeal[]);
+		})
+	}
 
 	const fetchData = async () => {
 		const url = `${LINK}${ENDPOINT.MEALS.GET_MEAL_PAGE.replace("{page}", props.page.toString())}`;

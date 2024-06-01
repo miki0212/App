@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\adminPanel\blockUserAdmin\blockUserListElement\" />
+    <Folder Include="src\adminPanel\blockUserAdmin\manageUserList\" />
     <Folder Include="src\adminPanel\mainAdminPage\" />
     <Folder Include="src\adminPanel\adminDataProvider\" />
     <Folder Include="src\components\exercises\" />
@@ -17,6 +18,8 @@
     <Folder Include="src\components\meal\mealListItem\" />
     <Folder Include="src\components\meal\user\addNewMeal\" />
     <Folder Include="src\components\meal\user\userMealListElementComponent\" />
+    <Folder Include="src\components\userRanking\" />
+    <Folder Include="src\Interfaces\Admin\Nowy folder\" />
     <Folder Include="src\Interfaces\Exercise\" />
     <Folder Include="src\Interfaces\Meal\" />
     <Folder Include="src\Interfaces\Meals\" />

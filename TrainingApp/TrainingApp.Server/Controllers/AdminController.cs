@@ -113,26 +113,65 @@ namespace TrainingApp.Server.Controllers
 
 
         [HttpGet("getAdminUserList", Name = "getAdminUserList")]
-        public async Task<IActionResult> GetAdminUserList(int adminId,int pageNumber)
+        public async Task<IActionResult> GetAdminUserList(int pageNumber)
         {
-            Dictionary<string, string> statusMap = await _adminService.GetAdminUserList(adminId, pageNumber);
+            Dictionary<string, string> statusMap = await _adminService.GetAdminUserList(pageNumber);
 
             statusMap.TryGetValue("statusCode", out string code);
             statusMap.TryGetValue("message", out string message);
 
             if (int.Parse(code) == 0 || int.Parse(code) == 2)
             {
-                return Ok(statusMap);
+                return Ok(message);
             }
             else if (int.Parse(code) == 1)
             {
-                return NotFound(message);
+                return Ok(message);
             }
             else
             {
                 return Conflict(message);
             }
         }
-    }
 
+        [HttpGet("getMaxUserPage", Name = "getMaxUserPage")]
+        public async Task<IActionResult> GetMaxUserPage()
+        {
+            int statusMap = await _adminService.GetMaxUserPage();
+
+            //statusMap.TryGetValue("statusCode", out string code);
+            //statusMap.TryGetValue("message", out string message);
+            return Ok(statusMap);
+            //if (int.Parse(code) == 0 || int.Parse(code) == 2)
+            //{
+            //    return Ok(statusMap);
+            //}
+            //else if (int.Parse(code) == 1)
+            //{
+            //    return NotFound(message);
+            //}
+            //else
+            //{
+            //    return Conflict(message);
+            //}
+        }
+
+        [HttpGet("blockUser", Name = "blockUser")]
+        public async Task<IActionResult> BlockUser(int userId)
+        {
+            string status = await _adminService.BlockUser(userId);
+
+
+
+            if (status.Equals("Blad serwera !!! Sprobuj pozniej !!!"))
+            {
+                return Ok(status);
+            }
+            else
+            {
+                return Ok(status);
+            }
+
+        }
+    }
 }

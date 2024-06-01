@@ -9,7 +9,7 @@ import INewMealInHistory from "../../../../Interfaces/meal/INewMealInHistory";
 import UserMealListElementComponent from "../userMealListElementComponent/UsermealListElementComponent";
 
 
-export default function UserAddMealComponent(props: { isActiveAddMeal: boolean, setIsActiveAddMeal: any }) {
+export default function UserAddMealComponent(props: { isActiveAddMeal: boolean, setIsActiveAddMeal: any, getUserCalories: any, userCalories: number }) {
     const [chosenMeal, setChosenMeal] = useState<IMeal>();
 
     const [mealList, setMealList] = useState<IMeal[]>();
@@ -109,6 +109,7 @@ export default function UserAddMealComponent(props: { isActiveAddMeal: boolean, 
             }).then(data => {
                 if (data == true) {
                     setStatusMessage("Dodano posilek do listy")
+                    props.getUserCalories();
                     setTimeout(() => {
                         setStatusMessage("")
                     }, 1500)

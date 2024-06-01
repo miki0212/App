@@ -91,9 +91,19 @@ public class UserService
     public async Task<Dictionary<string, string>> LoginUser   (UserCredentials user)
     {
         Dictionary<string, string> messages = new Dictionary<string, string>();
+      
         using (FitAppContext context = new FitAppContext(_configuration))
         {
             string hashedPassword = await HashedPassword(user.Password);
+            var existsLoginUser = context.Users.FirstOrDefault(t => t.Login == user.Login && t.Haslo == hashedPassword);
+
+            if (existsLoginUser == null)
+            {
+                messages.Add("statusCode", "2");
+                messages.Add("message", "B³êdny login lub has³o !!!");
+                return messages;
+            }
+
             var existsUser = context.Users.FirstOrDefault(t => t.Login == user.Login && t.Haslo == hashedPassword).Id;
 
             if(existsUser == null)
@@ -103,6 +113,12 @@ public class UserService
                 return messages;
             }
 
+            if (existsLoginUser.IsBlocked) {
+                messages.Add("statusCode", "3");
+                messages.Add("message", "Konto zostalo zablokowane !!!");
+                return messages;
+            }
+                
             try
             {
                 var token = GenerateToken(user.Login,existsUser);

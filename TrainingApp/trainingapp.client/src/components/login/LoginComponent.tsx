@@ -25,6 +25,10 @@ export default function LoginComponent() {
 
 	const [responseServerMessage, setResponseServerMessage] = useState("");
 
+	const [loginError, setLoginError] = useState("")
+	const [showLoginError, setShowLoginError] = useState(false)
+
+
 	useEffect(() => {
 		const token: IDecodedToken = DecodedTokenProperties();
 
@@ -83,21 +87,38 @@ export default function LoginComponent() {
 					body: JSON.stringify(userCredentials)
 				})
 					.then(response => {
-						if (response.status === 400) {
-							setErrorLogin(true)
-							setResponseServerMessage("Wyst¹pi³ b³¹d serwera");
-							throw new Error('Network response was not ok');
-						} else if (response.status === 409) {
-							setErrorLogin(true);
+
+						if (response.status === 200) {
+							return response.text();
 						}
 
-						return response.text();
+
+						if (response.status === 202) {
+							setShowLoginError(true)
+							setLoginError("Uzytkownik jest zablokowany");
+						}
+
+						if (response.status === 400) {
+							setShowLoginError(true)
+							setLoginError("Wyst¹pi³ b³¹d serwera")
+							//setErrorLogin(true)
+							//setResponseServerMessage("Wyst¹pi³ b³¹d serwera");
+							throw new Error('Network response was not ok');
+
+						} else if (response.status === 409) {
+							setShowLoginError(true)
+							setLoginError("Podaj poprawny login lub haslo");
+							//setErrorLogin(true);
+							//setErrorLoginMessage("Podaj poprawny login lub haslo")
+						}
+
+						
 					})
 					.then(data => {
-						console.log(data)
-						localStorage.setItem('userToken', data);
-						window.location.href = '/user/UserMainPage';
-						//setResponseServerMessage(data);
+						if (data) {
+							localStorage.setItem('userToken', data);
+							window.location.href = '/user/UserMainPage';
+						}
 						return data;
 					})
 					.catch(() => {
@@ -135,6 +156,10 @@ export default function LoginComponent() {
 				<button className="go-to-register">
 					<Link className="link" to="/register" >Nie masz konta? Zaloz je</Link>
 				</button>
+
+				<div className="login-message">
+					{showLoginError ? loginError : ""}
+				</div>
 
 			</div>
 		</div>

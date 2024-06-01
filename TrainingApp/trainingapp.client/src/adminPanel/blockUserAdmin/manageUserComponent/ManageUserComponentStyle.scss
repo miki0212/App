@@ -1,0 +1,21 @@
+.manage-user-component {
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 450px;
+
+    .btn-container{
+        width:100%;
+        display:flex;
+        justify-content:space-between;
+
+        button{
+            cursor:pointer;
+            padding:5px;
+            width:500px;
+        }
+
+    }
+}

@@ -12,6 +12,8 @@ import NavigationAdmin from '../../adminPanel/navigationAdmin/NavigationAdmin';
 import MainAdminPage from '../../adminPanel/mainAdminPage/MainAdminPage';
 import AddExerciseAdmin from '../../adminPanel/addExercise/AddExerciseAdmin';
 import MealContainerComponent from '../meal/mealContainer/MealContainerComponent';
+import ManageUserComponent from '../../adminPanel/blockUserAdmin/manageUserComponent/ManageUserComponent';
+import UserRankingContainer from '../userRanking/UserRankingContainer';
 
 export default function MainWindow() {
 	return (
@@ -27,6 +29,7 @@ export default function MainWindow() {
 					{/*Admin Panel*/}
 					<Route path="/admin/login" element={<AdminPanelLoginComponent />}></Route>
 					<Route path="/admin/adminMainPage" element={<MainAdminPage />}></Route>
+					<Route path="/admin/ManageUser" element={<ManageUserComponent />}></Route>
 					<Route path="/admin/addExercise" element={<AddExerciseAdmin />}></Route>
 
 
@@ -37,6 +40,7 @@ export default function MainWindow() {
 					<Route path="/user/UserMainPage" element={<MainPageUserController />} />
 					<Route path="/user/UserProfile" element={<UserProfileComponent />} />
 					<Route path="/user/Exercises" element={<ExercisesComponent />} />
+					<Route path="/user/ExercisesRanking" element={<UserRankingContainer />} />
 
 					{/*Meals*/}
 					<Route path="/user/Meal" element={<MealContainerComponent />} />

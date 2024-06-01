@@ -65,9 +65,9 @@ namespace TrainingApp.Server.Controllers
         }
 
         [HttpGet("getUserMealHistory", Name = "getUserMealHistory")]
-        public async Task<IActionResult> GetUserMealHistory(int page)
+        public async Task<IActionResult> GetUserMealHistory(int userId)
         {
-            Dictionary<string, List<UserMealHistoryDto>> statusMap = await _mealService.GetUserMealHistory();
+            Dictionary<string, List<UserMealHistoryDto>> statusMap = await _mealService.GetUserMealHistory(userId);
 
 
             statusMap.TryGetValue("message", out List<UserMealHistoryDto> mealHistory);

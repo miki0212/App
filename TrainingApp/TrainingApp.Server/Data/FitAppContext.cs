@@ -61,6 +61,10 @@ public partial class FitAppContext : DbContext
               .HasMaxLength(255)
               .IsUnicode(false);
 
+            entity.Property(e => e.IsDeleted);
+
+            entity.Property(e => e.IsBlocked);
+
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
         });
 

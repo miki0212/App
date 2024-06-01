@@ -12,4 +12,6 @@ public partial class User
     public string? Nazwisko { get; set; }
     public string? Email { get; set; }
     public string? Haslo { get; set; }
+    public bool IsDeleted { get; set; }
+    public bool IsBlocked { get; set; }
 }

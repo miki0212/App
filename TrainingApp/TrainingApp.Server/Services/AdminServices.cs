@@ -211,7 +211,7 @@ public class AdminService
         return messages;
     }
 
-    public async Task<Dictionary<string, string>> GetAdminUserList(int adminId, int pageNumber)
+    public async Task<Dictionary<string, string>> GetAdminUserList(int pageNumber)
     {
         int pageSize = 6;
         int maxUserPage = await GetMaxUserPage();
@@ -219,8 +219,9 @@ public class AdminService
         Dictionary<string, string> messages = new Dictionary<string, string>();
         using (FitAppContext context = new FitAppContext(_configuration))
         {
-            var userList = context.Exercises.OrderBy(e => e.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-            if (userList.Count > 0)
+            var userList = context.Users.OrderBy(e => e.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+            if (userList.Count > 0 && pageNumber <= maxUserPage)
             {
                 var userListSerialize = JsonSerializer.Serialize(userList);
                 messages.Add("statusCode", "1");
@@ -246,6 +247,32 @@ public class AdminService
             int totalExercisesPage = (int)Math.Ceiling((double)totalExercisesRecords / pageSize);
 
             return totalExercisesPage;
+        }
+    }
+
+    public async Task<string> BlockUser(int userId)
+    {
+        string returnMessage;
+
+        using (FitAppContext context = new FitAppContext(_configuration))
+        {
+
+            var existUser = context.Users.First(u => u.Id == userId);
+            if (existUser != null)
+            {
+                if (existUser.IsBlocked)
+                {
+                    returnMessage = "Uzytkonik zostal odblokowany";
+                }
+                else {
+                    returnMessage = "Uzytkonik zostal zablokowany";
+                }
+                existUser.IsBlocked = !existUser.IsBlocked;
+                context.SaveChanges();
+                return returnMessage;
+            }
+            returnMessage = "Blad serwera !!! Sprobuj pozniej !!!";
+            return returnMessage;
         }
     }
     private async Task<string> HashedPassword(string password)

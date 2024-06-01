@@ -1,0 +1,43 @@
+.manage-user-list-element {
+    min-width: 100%;
+    display: flex;
+    justify-content: space-around;
+    /*flex-direction: column;*/
+    border: 2px solid white;
+    border-radius:10px;
+    padding: 10px 0px;
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 130px;
+        min-height: 30px;
+    }
+
+    button {
+        /*padding: 0;*/
+        min-width: 130px;
+        margin: 0;
+    }
+}
+
+.manage-user-list-head-element {
+    min-width: 100%;
+    display: flex;
+    justify-content: space-around;
+    /*flex-direction: column;*/
+    border: 4px solid wheat;
+    border-radius: 10px;
+    padding: 10px 0px;
+    font-weight:bold;
+
+    div {
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 130px;
+        min-height: 30px;
+    }
+}

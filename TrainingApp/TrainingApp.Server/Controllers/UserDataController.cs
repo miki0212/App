@@ -154,5 +154,23 @@ namespace TrainingApp.Server.Controllers
             exerciseList.TryGetValue("message", out List<ExerciseOne> list);
             return Ok(list);
         }
+
+        [HttpGet("calculateExerciseCalories", Name = "calculateExerciseCalories")]
+        public async Task<IActionResult> CalculateExerciseCalories(int UserId)
+        {
+            var exerciseList = await _userService.CalculateExerciseCalories(UserId);
+            exerciseList.TryGetValue("message", out double caloricExerciseSum);
+           
+            return Ok(caloricExerciseSum);
+        }
+
+        [HttpGet("getExercisesUserRanking", Name = "getExercisesUserRanking")]
+        public async Task<IActionResult> GetExercisesUserRanking(int UserId)
+        {
+            var exerciseList = await _userService.GetExercisesUserRanking(UserId,4);
+            exerciseList.TryGetValue("message", out DtoUserRankingList caloricExerciseSum);
+
+            return Ok(caloricExerciseSum);
+        }
     }
 }
